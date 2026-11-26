@@ -159,6 +159,8 @@ https://{\$SUB_DOMAIN} {
         reverse_proxy {\$SUB_BACKEND_URL} {
             header_up X-Real-IP {remote}
             header_up Host {host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
         }
     }
 }

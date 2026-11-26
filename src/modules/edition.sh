@@ -1,6 +1,5 @@
 #!/bin/bash
-# Official Remnawave images vs Remnawave-X (qWDTT).
-# subscription-page stays official in both editions.
+# Official Remnawave images vs Remnawave X (qWDTT + branded subscription page).
 
 REMN_EDITION_FILE="${DIR_REMNAWAVE}edition"
 REMN_BACKEND_OFFICIAL="remnawave/backend:3"
@@ -8,7 +7,7 @@ REMN_NODE_OFFICIAL="remnawave/node:latest"
 REMN_SUB_OFFICIAL="remnawave/subscription-page:latest"
 REMN_BACKEND_X="ghcr.io/samur005/backend-x:3"
 REMN_NODE_X="ghcr.io/samur005/node-x:latest"
-REMN_SUB_X="remnawave/subscription-page:latest"
+REMN_SUB_X="ghcr.io/samur005/subscription-page-x:latest"
 
 REMN_EDITION="${REMN_EDITION:-}"
 REMN_BACKEND_IMAGE="${REMN_BACKEND_IMAGE:-$REMN_BACKEND_OFFICIAL}"
@@ -18,13 +17,14 @@ REMN_SUB_IMAGE="${REMN_SUB_IMAGE:-$REMN_SUB_OFFICIAL}"
 set_remn_edition_images() {
     local edition="${1:-official}"
     REMN_EDITION="$edition"
-    REMN_SUB_IMAGE="$REMN_SUB_OFFICIAL"
     if [ "$edition" = "custom" ]; then
         REMN_BACKEND_IMAGE="$REMN_BACKEND_X"
         REMN_NODE_IMAGE="$REMN_NODE_X"
+        REMN_SUB_IMAGE="$REMN_SUB_X"
     else
         REMN_BACKEND_IMAGE="$REMN_BACKEND_OFFICIAL"
         REMN_NODE_IMAGE="$REMN_NODE_OFFICIAL"
+        REMN_SUB_IMAGE="$REMN_SUB_OFFICIAL"
         REMN_EDITION="official"
     fi
 }
@@ -33,7 +33,7 @@ detect_remn_edition() {
     local file
     for file in /opt/remnawave/docker-compose.yml /opt/remnanode/docker-compose.yml; do
         [ -f "$file" ] || continue
-        if grep -qE 'image:[[:space:]]*ghcr.io/samur005/(backend-x|node-x)' "$file"; then
+        if grep -qE 'image:[[:space:]]*ghcr.io/samur005/(backend-x|node-x|subscription-page-x)' "$file"; then
             echo custom
             return 0
         fi
@@ -95,8 +95,7 @@ prompt_remn_edition() {
     esac
 }
 
-# Rewrite backend/node image lines to the saved edition. Never touch
-# remnawave/subscription-page.
+# Rewrite backend/node/subscription-page image lines to the saved edition.
 rewrite_compose_images() {
     local file="$1"
     [ -f "$file" ] || return 0
@@ -109,6 +108,8 @@ rewrite_compose_images() {
             -e 's|(image:[[:space:]]*)ghcr.io/samur005/backend-x:[^[:space:]]+|\1'"$REMN_BACKEND_X"'|' \
             -e 's|(image:[[:space:]]*)remnawave/node:[^[:space:]]+|\1'"$REMN_NODE_X"'|' \
             -e 's|(image:[[:space:]]*)ghcr.io/samur005/node-x:[^[:space:]]+|\1'"$REMN_NODE_X"'|' \
+            -e 's|(image:[[:space:]]*)remnawave/subscription-page:[^[:space:]]+|\1'"$REMN_SUB_X"'|' \
+            -e 's|(image:[[:space:]]*)ghcr.io/samur005/subscription-page-x:[^[:space:]]+|\1'"$REMN_SUB_X"'|' \
             "$file" > "$tmp"
     else
         sed -E \
@@ -116,6 +117,8 @@ rewrite_compose_images() {
             -e 's|(image:[[:space:]]*)remnawave/backend:[^[:space:]]+|\1'"$REMN_BACKEND_OFFICIAL"'|' \
             -e 's|(image:[[:space:]]*)ghcr.io/samur005/node-x:[^[:space:]]+|\1'"$REMN_NODE_OFFICIAL"'|' \
             -e 's|(image:[[:space:]]*)remnawave/node:[^[:space:]]+|\1'"$REMN_NODE_OFFICIAL"'|' \
+            -e 's|(image:[[:space:]]*)ghcr.io/samur005/subscription-page-x:[^[:space:]]+|\1'"$REMN_SUB_OFFICIAL"'|' \
+            -e 's|(image:[[:space:]]*)remnawave/subscription-page:[^[:space:]]+|\1'"$REMN_SUB_OFFICIAL"'|' \
             "$file" > "$tmp"
     fi
     mv "$tmp" "$file"

@@ -562,6 +562,8 @@ https://{\$SUB_DOMAIN} {
         reverse_proxy {\$SUB_BACKEND_URL} {
             header_up X-Real-IP {remote}
             header_up Host {host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
         }
     }
 }
@@ -652,6 +654,14 @@ installation_panel_node_caddy() {
 
     # Create API token for subscription page
     create_api_token "$domain_url" "$token" "$target_dir"
+
+    # Remnawave X only: inbounds, squad, hosts (including qWDTT) and sidecar.
+    if type load_provision_remnawave_x_module >/dev/null 2>&1; then
+        load_provision_remnawave_x_module true || true
+    fi
+    if type run_remnawave_x_turnkey >/dev/null 2>&1; then
+        run_remnawave_x_turnkey "$domain_url" "$token" "$SELFSTEAL_DOMAIN" "${CREATED_NODE_UUID:-}"
+    fi
 
     # Stop and start Remnawave X
     step_do "${LANG[STOPPING_REMNAWAVE]}"

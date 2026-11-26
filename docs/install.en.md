@@ -1,6 +1,6 @@
 # Installing Remnawave X
 
-A practical guide for the [samur005/remnawave-reverse-proxy-X](https://github.com/samur005/remnawave-reverse-proxy-X) installer (`main` branch, script version `3.8.4-x.2`). This is a fork of the eGames installer: it can deploy official Remnawave or the **Remnawave X** edition with qWDTT.
+A practical guide for the [samur005/remnawave-reverse-proxy-X](https://github.com/samur005/remnawave-reverse-proxy-X) installer (`main` branch, script version `3.8.4-x.3`). This is a fork of the eGames installer: it can deploy official Remnawave or the **Remnawave X** edition with qWDTT.
 
 Русская версия: [install.md](./install.md).
 
@@ -18,7 +18,8 @@ A practical guide for the [samur005/remnawave-reverse-proxy-X](https://github.co
   - SSH (22/tcp, or whatever port `sshd` listens on);
   - 80/tcp (certificate issuance);
   - 443/tcp (HTTPS and Xray);
-  - for qWDTT on the node: **56000/tcp and 56000/udp** (peer), **56001/udp** (sidecar WireGuard), **56003/udp** (raw).
+  - for qWDTT on the node: **56000/tcp and 56000/udp** (peer), **56001/udp** (sidecar WireGuard), **56003/udp** (raw);
+  - for Remnawave X managed inbounds (this edition only): usually **8443/tcp** (Trojan), **8388/tcp and 8388/udp** (Shadowsocks), **8447/udp** (Hysteria2) — the installer opens the ports it picks.
   Do not open client port `9000` on the server: it is local to the phone. If you change sidecar ports in the panel, open those instead of the defaults.
 - Port 443 must not be taken by another service.
 
@@ -56,7 +57,7 @@ On the first install (if no edition is saved yet) the script asks which images t
 1. **Official Remnawave** — `remnawave/backend:3` and `remnawave/node:latest`. No qWDTT UI.
 2. **Remnawave X with qWDTT** — `ghcr.io/samur005/backend-x:3` and `ghcr.io/samur005/node-x:latest`. The panel gets a qWDTT section; the node runs the sidecar.
 
-The subscription page stays official in both cases: `remnawave/subscription-page:latest`.
+The Official edition uses `remnawave/subscription-page:latest`. Remnawave X uses `ghcr.io/samur005/subscription-page-x:latest` (the fork branded Remnawave X). That page includes an **AntiBS2client** card with a download link to [the GitHub releases](https://github.com/samur005/AntiBS2client-releases/releases/latest) and the app icon from the program sources. Caddy (and Nginx) forward `X-Forwarded-Proto` and `X-Forwarded-For` to the subscription page: without those headers the official page root returns 502, even if `https://<sub>/<shortUuid>` still opens.
 
 The choice is stored in `/usr/local/remnawave_reverse/edition` (`official` or `custom`). You can change it later in the panel management menu: “Switch Official / Remnawave X images”. A plain `docker compose pull` will not replace panel and node images with the other edition: the installer rewrites `image:` lines to match the saved edition. The `:3` tag on `backend-x` tracks the Remnawave X line (including builds such as `3.4.11-x.6`).
 
@@ -86,18 +87,33 @@ After install:
 
 Further management is the `rr` command: status, logs, updates, CLI, edition switch.
 
-## qWDTT after install (Remnawave X only)
+## Turnkey setup after install (Remnawave X only)
+
+If you installed the **panel and node together** in the Remnawave X edition, the installer finishes the following automatically and idempotently after the panel is up:
+
+1. Adds any missing managed inbounds that go into the squad and the subscription: VLESS Reality is already created on 443 (dest `/dev/shm/nginx.sock`, serverNames = the node domain, Reality keys are generated), plus Trojan, Shadowsocks and Hysteria2 on free ports (usually 8443, 8388 and 8447/udp; 80, 443, 22, SSH and the qWDTT ports 56000/56001/56003 are left alone). Panel-only inbounds (http, mixed, dokodemo-door, wireguard, tunnel, tun) are not created.
+2. Binds those inbounds to the node the installer created.
+3. Adds them to the default squad and sets `includeQwdtt`.
+4. Creates hosts on the node’s public domain (the one you entered), including a separate qWDTT host. Remarks distinguish location/protocol, for example `Steal · Trojan`. Private addresses (`10/8`, `172.16/12`, `192.168/16`, `127/8`) are never used.
+5. Assigns the qWDTT sidecar to that node, turns on automatic VK hashes (`autoVkHash`) and, if `subHost` is empty, fills it with the node’s public domain as a fallback.
+
+If those inbounds or hosts already exist, the script does not duplicate them and does not delete anything. It does not create a test user.
+
+### VK cookies and hashes
+
+In 3s-ui, VK **hashes** (calls) are generated automatically once session cookies are stored and `autoVkHash` is on. The installer does not invent cookies (`remixsid`): they are still saved once in the panel’s qWDTT settings. If cookies are already stored, the installer asks the panel to create a hash immediately. Otherwise hashes appear automatically after the cookies are saved.
+
+## qWDTT later (if you need to add something)
 
 qWDTT is a sidecar on the node, not an Xray inbound. It does not replace existing Reality hosts.
 
-1. In the panel open **qWDTT**. Enable the integration, save VK cookies, generate hashes (or turn on automatic maintenance). Under “Assigned nodes” select the nodes that should run the sidecar. An empty list means no nodes; new nodes are not added automatically.
-2. “Subscription host (fallback)” (`subHost`) is **not** each node’s domain and does not need to be edited when you add nodes. It is only a fallback peer when the host address is empty and the node address is private.
-3. For distinct locations in the subscription, create **qWDTT hosts**: Hosts → New host → type **qWDTT**. Set the remark (the name/location the client sees), exactly one node in “Node (location)”, and the address and port (default 56000). The address may be left empty: the node’s public address is used. Private addresses such as `10/8`, `172.16/12`, `192.168/16`, `127/8` are never put in the subscription. If no public peer can be resolved, the host is skipped and the form shows a warning.
-4. Enable qWDTT on an internal squad (or grant a user access manually). Members of that squad get separate `qwdtt://` lines in the regular base64 subscription — one per eligible host, with that host’s name and the node’s public peer.
+1. “Subscription host (fallback)” (`subHost`) is **not** each node’s domain and does not need to be edited when you add nodes. It is only a fallback peer when the host address is empty and the node address is private. The turnkey install fills it for you.
+2. For distinct locations in the subscription, create **qWDTT hosts**: Hosts → New host → type **qWDTT**. Set the remark (the name/location the client sees), exactly one node in “Node (location)”, and the address and port (default 56000). The address may be left empty: the node’s public address is used. Private addresses are never put in the subscription.
+3. Members of a squad with the qWDTT flag get separate `qwdtt://` lines in the regular base64 subscription — one per eligible host, with that host’s name and the node’s public peer.
 
 ## Updates and images
 
-- Update the installer and the stack from the `rr` menu (panel management / update). For the Remnawave X edition this pulls `ghcr.io/samur005/backend-x` and `ghcr.io/samur005/node-x`; the subscription page stays official `remnawave/subscription-page`.
+- Update the installer and the stack from the `rr` menu (panel management / update). For the Remnawave X edition this pulls `ghcr.io/samur005/backend-x`, `ghcr.io/samur005/node-x` and `ghcr.io/samur005/subscription-page-x`. The Official edition still uses `remnawave/backend`, `remnawave/node` and `remnawave/subscription-page`.
 - Panel images: [ghcr.io/samur005/backend-x](https://github.com/samur005/backend-X/pkgs/container/backend-x). Tags `:3` and `:latest` move with the line; you can pin a specific one such as `3.4.11-x.6`.
 - The panel frontend is baked into `backend-x` from [samur005/frontend-X](https://github.com/samur005/frontend-X/releases) releases (`remnawave-frontend.zip`).
 - Node image: [ghcr.io/samur005/node-x](https://github.com/samur005/node-X/pkgs/container/node-x), usually the `:latest` tag.

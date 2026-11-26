@@ -1874,7 +1874,7 @@ LANG[CB_UNHIDE_OK]="Исходные хосты снова в подписке: 
 
 # Remnawave X edition
 LANG[EDITION_TITLE]="Какие образы Remnawave X использовать?"
-LANG[EDITION_HINT]="Official оставляет remnawave/backend и remnawave/node. Remnawave X берёт ghcr.io/samur005/backend-x и node-x (qWDTT). Страница подписок в обоих случаях остаётся remnawave/subscription-page."
+LANG[EDITION_HINT]="Official оставляет remnawave/backend, remnawave/node и remnawave/subscription-page. Remnawave X берёт ghcr.io/samur005/backend-x, node-x (qWDTT) и subscription-page-x."
 LANG[EDITION_OFFICIAL]="Официальный Remnawave (remnawave/backend:3, remnawave/node:latest)"
 LANG[EDITION_CUSTOM]="Remnawave X с qWDTT (ghcr.io/samur005/backend-x:3, ghcr.io/samur005/node-x:latest)"
 LANG[EDITION_PROMPT]="Выберите 1 или 2:"
@@ -1886,3 +1886,18 @@ LANG[UPDATE_BACKUP_FAILED]="Не удалось создать резервну�
 LANG[UPDATE_REWRITING]="Фиксирую образы в compose под выбранную редакцию (%s)"
 LANG[ROLLBACK_LAST]="Откатить последнее обновление панели/ноды"
 LANG[ROLLBACK_NONE]="Резервная копия обновления в %s не найдена"
+
+# Remnawave X turnkey provision
+LANG[RWX_PROVISION_START]="Remnawave X: завершаю настройку под ключ (инбаунды, сквад, хосты, qWDTT)..."
+LANG[RWX_PROVISION_OK]="Настройка под ключ Remnawave X на месте"
+LANG[RWX_PROVISION_SKIP]="Настройка под ключ Remnawave X пропущена (редакция Official или нет ноды)"
+LANG[RWX_PROVISION_FAIL]="Настройка под ключ Remnawave X не завершилась: %s (сама панель поднята)"
+LANG[RWX_PROVISION_PRIVATE]="Публичный адрес ноды %s частный — хосты с этим адресом не создавались"
+LANG[RWX_INBOUNDS_OK]="Управляемые инбаунды есть в профиле конфигурации"
+LANG[RWX_NODE_BIND_OK]="Управляемые инбаунды привязаны к ноде %s"
+LANG[RWX_SQUAD_OK]="В сквад по умолчанию входят управляемые инбаунды и qWDTT"
+LANG[RWX_HOSTS_OK]="Хосты подписки для этой ноды на месте"
+LANG[RWX_QWDTT_OK]="Сайдкар qWDTT назначен этой ноде; автоматические хеши VK включены"
+LANG[RWX_QWDTT_HASH_OK]="Хеш VK создан из cookies, которые уже были сохранены в панели"
+LANG[RWX_QWDTT_HASH_WAIT]="Хеши VK появятся автоматически после сохранения cookies в настройках qWDTT (автогенерация хешей как в 3s-ui). Установщик cookies не придумывает."
+LANG[RWX_UFW_INBOUNDS_OK]="Порты управляемых инбаундов открыты в ufw: %s"
