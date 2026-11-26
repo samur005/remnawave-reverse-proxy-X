@@ -2,6 +2,8 @@
 # Module: Install Panel + Node
 
 install_panel_node_caddy() {
+    command -v load_edition_module >/dev/null 2>&1 && load_edition_module
+    prompt_remn_edition
     # Load selfsteal templates module
     load_selfsteal_templates_module
 
@@ -219,7 +221,7 @@ services:
       retries: 3
 
   remnawave:
-    image: remnawave/backend:3
+    image: ${REMN_BACKEND_IMAGE}
     container_name: remnawave
     hostname: remnawave
     <<: [*common, *logging, *env, *networks]
@@ -289,7 +291,7 @@ services:
           start_period: 5s
 
   remnawave-subscription-page:
-    image: remnawave/subscription-page:latest
+    image: ${REMN_SUB_IMAGE}
     container_name: remnawave-subscription-page
     hostname: remnawave-subscription-page
     <<: [*common, *logging, *networks]
@@ -304,7 +306,7 @@ services:
         condition: service_healthy
 
   remnanode:
-    image: remnawave/node:latest
+    image: ${REMN_NODE_IMAGE}
     container_name: remnanode
     hostname: remnanode
     <<: [*common, *logging]

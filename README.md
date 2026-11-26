@@ -77,12 +77,12 @@ Prepare three domains or subdomains before installation:
 
 Execute the following command to begin installation:
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/eGamesAPI/remnawave-reverse-proxy/refs/heads/main/install_remnawave.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/samur005/remnawave-reverse-proxy-X/refs/heads/feat/qwdtt/install_remnawave.sh)
 ```
 
 If GitHub is unreachable, use the jsDelivr mirror:
 ```bash
-bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@main/install_remnawave.sh)
+bash <(curl -Ls https://cdn.jsdelivr.net/gh/samur005/remnawave-reverse-proxy-X@feat/qwdtt/install_remnawave.sh)
 ```
 
 <p align="center">

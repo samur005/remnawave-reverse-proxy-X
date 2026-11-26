@@ -2,6 +2,8 @@
 # Module: Install Panel
 
 install_panel_caddy() {
+    command -v load_edition_module >/dev/null 2>&1 && load_edition_module
+    prompt_remn_edition
     mkdir -p /opt/remnawave && cd /opt/remnawave
 
     reading "${LANG[ENTER_PANEL_DOMAIN]}" PANEL_DOMAIN
@@ -210,7 +212,7 @@ services:
       retries: 3
 
   remnawave:
-    image: remnawave/backend:3
+    image: ${REMN_BACKEND_IMAGE}
     container_name: remnawave
     hostname: remnawave
     <<: [*common, *logging, *env, *networks]
@@ -282,7 +284,7 @@ EOL
         cat >> docker-compose.yml <<EOL
 
   remnawave-subscription-page:
-    image: remnawave/subscription-page:latest
+    image: ${REMN_SUB_IMAGE}
     container_name: remnawave-subscription-page
     hostname: remnawave-subscription-page
     <<: [*common, *logging, *networks]

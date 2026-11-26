@@ -80,6 +80,8 @@ show_manage_panel_menu() {
     local opt_access="__none__"
     local opt_upgrade="__none__"
     local opt_minclientver="__none__"
+    local opt_edition="__none__"
+    local opt_rollback="__none__"
 
     if [ -f /opt/remnawave/docker-compose.yml ] && grep -q "^[[:space:]]*remnanode:" /opt/remnawave/docker-compose.yml; then
         last=$((last + 1))
@@ -98,6 +100,13 @@ show_manage_panel_menu() {
         opt_minclientver=$last
         echo -e "${COLOR_YELLOW}${last}. ${LANG[MINCLIENTVER_MENU]}${COLOR_RESET}"
     fi
+
+    last=$((last + 1))
+    opt_edition=$last
+    echo -e "${COLOR_YELLOW}${last}. ${LANG[EDITION_MENU]}${COLOR_RESET}"
+    last=$((last + 1))
+    opt_rollback=$last
+    echo -e "${COLOR_YELLOW}${last}. ${LANG[ROLLBACK_LAST]}${COLOR_RESET}"
 
     echo -e ""
     echo -e "${COLOR_YELLOW}0. ${LANG[EXIT]}${COLOR_RESET}"
@@ -144,6 +153,16 @@ show_manage_panel_menu() {
             ;;
         "$opt_minclientver")
             set_reality_min_client_ver
+            sleep 2
+            show_manage_panel_menu
+            ;;
+        "$opt_edition")
+            switch_remn_edition
+            sleep 2
+            show_manage_panel_menu
+            ;;
+        "$opt_rollback")
+            rollback_last_stack_update
             sleep 2
             show_manage_panel_menu
             ;;
@@ -285,6 +304,20 @@ update_panel_node() {
             continue
         fi
 
+        command -v load_edition_module >/dev/null 2>&1 && load_edition_module
+        load_remn_edition
+        local backup_dir=""
+        backup_dir=$(backup_stack_dir "$dir") || backup_dir=""
+        if [ -z "$backup_dir" ]; then
+            echo -e "${COLOR_RED}${LANG[UPDATE_BACKUP_FAILED]}${COLOR_RESET}"
+            continue
+        fi
+        printf "${COLOR_GREEN}${LANG[UPDATE_BACKUP]}${COLOR_RESET}\n" "$backup_dir"
+        if [ -f "$dir/docker-compose.yml" ]; then
+            printf "${COLOR_YELLOW}${LANG[UPDATE_REWRITING]}${COLOR_RESET}\n" "$REMN_EDITION"
+            rewrite_compose_images "$dir/docker-compose.yml"
+        fi
+
         images_before=$(docker compose config --images | sort -u)
         if [ -n "$images_before" ]; then
             before=$(echo "$images_before" | xargs -I {} docker images -q {} | sort -u)
@@ -333,6 +366,7 @@ update_panel_node() {
             sleep 5
             if ! compose_run_spinner "${LANG[WAITING]}" docker compose up -d; then
                 echo -e "${COLOR_RED}$(printf "${LANG[COMPOSE_UP_FAIL]}" "$dir" "$dir")${COLOR_RESET}"
+                [ -n "$backup_dir" ] && rollback_stack_dir "$dir" "$backup_dir"
                 continue
             fi
             sleep 1
@@ -1167,3 +1201,33 @@ close_panel_access() {
     fi
     return 0
 }
+
+switch_remn_edition() {
+    command -v load_edition_module >/dev/null 2>&1 && load_edition_module
+    prompt_remn_edition force
+    local dir
+    while IFS= read -r dir; do
+        [ -f "$dir/docker-compose.yml" ] || continue
+        backup_stack_dir "$dir" >/dev/null || true
+        rewrite_compose_images "$dir/docker-compose.yml"
+        echo -e "${COLOR_YELLOW}${dir}: ${REMN_BACKEND_IMAGE} / ${REMN_NODE_IMAGE}${COLOR_RESET}"
+    done < <(managed_compose_dirs)
+    echo -e "${COLOR_YELLOW}${LANG[UPDATE_PANEL_NODE]}${COLOR_RESET}"
+}
+
+rollback_last_stack_update() {
+    command -v load_edition_module >/dev/null 2>&1 && load_edition_module
+    local dir backup_dir any=0
+    while IFS= read -r dir; do
+        [ -n "$dir" ] || continue
+        backup_dir=$(latest_update_backup "$dir")
+        if [ -z "$backup_dir" ]; then
+            printf "${COLOR_YELLOW}${LANG[ROLLBACK_NONE]}${COLOR_RESET}\n" "$dir"
+            continue
+        fi
+        any=1
+        rollback_stack_dir "$dir" "$backup_dir"
+    done < <(managed_compose_dirs)
+    [ "$any" -eq 1 ] || return 0
+}
+

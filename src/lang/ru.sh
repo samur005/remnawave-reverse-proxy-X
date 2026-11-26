@@ -1869,3 +1869,18 @@ LANG[CB_HIDE_STEP]="Скрываю исходные хосты из подпис
 LANG[CB_HIDE_OK]="Исходные хосты скрыты: %s. Записи вернутся в подписку после разбора балансировщика"
 LANG[CB_UNHIDE_STEP]="Возвращаю видимость исходным хостам..."
 LANG[CB_UNHIDE_OK]="Исходные хосты снова в подписке: %s"
+
+# Remnawave-X edition
+LANG[EDITION_TITLE]="Какие образы Remnawave использовать?"
+LANG[EDITION_HINT]="Official оставляет remnawave/backend и remnawave/node. Remnawave-X берёт ghcr.io/samur005/backend-x и node-x (qWDTT). Страница подписок в обоих случаях остаётся remnawave/subscription-page."
+LANG[EDITION_OFFICIAL]="Официальный Remnawave (remnawave/backend:3, remnawave/node:latest)"
+LANG[EDITION_CUSTOM]="Remnawave-X с qWDTT (ghcr.io/samur005/backend-x:3, ghcr.io/samur005/node-x:latest)"
+LANG[EDITION_PROMPT]="Выберите 1 или 2:"
+LANG[EDITION_OFFICIAL_SAVED]="Будут использоваться официальные образы Remnawave. Выбор запоминается для следующих обновлений."
+LANG[EDITION_CUSTOM_SAVED]="Будут использоваться образы Remnawave-X. docker compose pull не подменит их официальными remnawave/* для панели и ноды."
+LANG[EDITION_MENU]="Переключить Official / Remnawave-X"
+LANG[UPDATE_BACKUP]="Резервная копия сохранена в %s"
+LANG[UPDATE_BACKUP_FAILED]="Не удалось создать резервную копию, обновление отменено"
+LANG[UPDATE_REWRITING]="Фиксирую образы в compose под выбранную редакцию (%s)"
+LANG[ROLLBACK_LAST]="Откатить последнее обновление панели/ноды"
+LANG[ROLLBACK_NONE]="Резервная копия обновления в %s не найдена"

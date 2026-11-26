@@ -2,6 +2,8 @@
 # Module: Install Node Only
 
 install_node_nginx() {
+    command -v load_edition_module >/dev/null 2>&1 && load_edition_module
+    prompt_remn_edition
     # Load selfsteal templates module
     load_selfsteal_templates_module
 
@@ -100,7 +102,7 @@ installation_node() {
     command: sh -c 'rm -f /dev/shm/nginx.sock && exec nginx -g "daemon off;"'
 
   remnanode:
-    image: remnawave/node:latest
+    image: ${REMN_NODE_IMAGE}
     container_name: remnanode
     hostname: remnanode
     <<: [*common, *logging]
