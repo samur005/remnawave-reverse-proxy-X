@@ -32,7 +32,7 @@ The reverse proxy runs on NGINX or Caddy. The architecture is built for speed: X
 
 | Version | Systems | Web server | Privileges |
 |:---:|:---:|:---:|:---:|
-| 3.8.3 | Debian, Ubuntu | NGINX or Caddy | root |
+| 3.8.4-x.2 | Debian 11/12, Ubuntu 22.04/24.04 | NGINX or Caddy | root |
 
 > [!IMPORTANT]
 > The script was tested in a KVM virtualization environment. For proper operation, you will need your own domain. It is recommended to run with root privileges on a freshly installed system.
@@ -74,6 +74,8 @@ Prepare three domains or subdomains before installation:
 ---
 
 ## Quick Start
+
+> Full Remnawave X install guide (requirements, Official vs Remnawave X editions, domains, qWDTT and updates): **[docs/install.md](docs/install.md)** (Russian) and **[docs/install.en.md](docs/install.en.md)** (English).
 
 Execute the following command to begin installation:
 ```bash
