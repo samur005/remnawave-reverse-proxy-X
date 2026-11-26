@@ -589,6 +589,7 @@ installation_panel_node_caddy() {
 
     remnawave_network_subnet=172.30.0.0/16
     ufw allow from "$remnawave_network_subnet" to any port 2222 proto tcp > /dev/null 2>&1
+    open_qwdtt_client_ports
 
     local domain_url="127.0.0.1:3000"
     local target_dir="/opt/remnawave"

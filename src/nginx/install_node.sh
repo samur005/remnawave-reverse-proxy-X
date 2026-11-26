@@ -157,6 +157,7 @@ server {
 EOL
 
     ufw allow from $PANEL_IP to any port 2222 > /dev/null 2>&1
+    open_qwdtt_client_ports
     ufw reload > /dev/null 2>&1
 
     echo -e "${COLOR_YELLOW}${LANG[STARTING_NODE]}${COLOR_RESET}"

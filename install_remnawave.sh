@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPT_VERSION="3.8.4-x.1"
+SCRIPT_VERSION="3.8.4-x.2"
 UPDATE_AVAILABLE=false
 DIR_REMNAWAVE="/usr/local/remnawave_reverse/"
 LANG_FILE="${DIR_REMNAWAVE}selected_language"
@@ -458,6 +458,18 @@ allow_ssh_ports() {
     done
 
     [ "$ok" = true ]
+}
+
+# Default qWDTT sidecar listen ports. clientPort (9000) is a client-local
+# setting and must not be opened on the server. If the operator changes
+# listenAddr / wgPort / listenRaw in the panel, open those ports instead.
+open_qwdtt_client_ports() {
+    command -v ufw >/dev/null 2>&1 || return 0
+    ufw allow 56000/tcp comment 'qWDTT DTLS/TCP peer' >/dev/null 2>&1 || true
+    ufw allow 56000/udp comment 'qWDTT DTLS/UDP peer' >/dev/null 2>&1 || true
+    ufw allow 56001/udp comment 'qWDTT wireguard' >/dev/null 2>&1 || true
+    ufw allow 56003/udp comment 'qWDTT raw' >/dev/null 2>&1 || true
+    ufw reload >/dev/null 2>&1 || true
 }
 
 check_os() {
