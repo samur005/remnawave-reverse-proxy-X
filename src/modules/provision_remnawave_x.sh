@@ -3,10 +3,10 @@
 # from managed inbounds to hosts and qWDTT. Idempotent: never delete
 # objects or duplicate inbounds/hosts that already exist.
 #
-# VK session cookies (remixsid) are not invented here. 3s-ui auto-generates
-# VK *hashes* once cookies are stored (autoVkHash / EnsureHashesNow). This
-# step turns that on and, if cookies are already present, asks the panel to
-# create a hash. Cookie values are never logged.
+# VK session cookies (remixsid) are never invented or submitted here.
+# autoVkHash is only enabled as a panel option. The installer does not
+# generate VK hashes and does not require cookies during install.
+# Cookie values are never logged.
 
 RWX_MANAGED_PROTOS="vless trojan shadowsocks hysteria"
 RWX_QWDTT_PORT=56000
@@ -27,9 +27,7 @@ rwx_msg() {
             RWX_NODE_BIND_OK) fmt="Managed inbounds are bound to node %s" ;;
             RWX_SQUAD_OK) fmt="Default squad includes the managed inbounds and qWDTT" ;;
             RWX_HOSTS_OK) fmt="Subscription hosts are in place for this node" ;;
-            RWX_QWDTT_OK) fmt="qWDTT sidecar is assigned to this node; auto hash is on" ;;
-            RWX_QWDTT_HASH_OK) fmt="A VK hash was generated from the cookies already stored in the panel" ;;
-            RWX_QWDTT_HASH_WAIT) fmt="VK hashes will be created automatically after cookies are saved in the qWDTT settings (3s-ui autoVkHash). The installer does not invent cookies." ;;
+            RWX_QWDTT_OK) fmt="qWDTT sidecar is assigned to this node; autoVkHash is enabled in the panel" ;;
             RWX_UFW_INBOUNDS_OK) fmt="Managed inbound ports opened in ufw: %s" ;;
             *) fmt="$key" ;;
         esac
@@ -615,13 +613,11 @@ rwx_ensure_qwdtt() {
         return 1
     fi
 
-    local sub_now nodes_now enabled auto has_cookies hashes
+    local sub_now nodes_now enabled auto
     sub_now=$(echo "$view" | jq -r '.response.subHost // ""')
     nodes_now=$(echo "$view" | jq -c '.response.nodeUuids // []')
     enabled=$(echo "$view" | jq -r '.response.enabled // false')
     auto=$(echo "$view" | jq -r '.response.autoVkHash // false')
-    has_cookies=$(echo "$view" | jq -r '.response.hasCookies // false')
-    hashes=$(echo "$view" | jq -r '.response.vkHashes // ""')
 
     local merged_nodes want_sub body resp need_patch=0
     merged_nodes=$(jq -c --argjson a "$nodes_now" --arg n "$node_uuid" '$a + [$n] | unique')
@@ -651,23 +647,8 @@ rwx_ensure_qwdtt() {
             return 1
         fi
         view="$resp"
-        has_cookies=$(echo "$view" | jq -r '.response.hasCookies // false')
-        hashes=$(echo "$view" | jq -r '.response.vkHashes // ""')
     fi
     step_ok "$(rwx_msg RWX_QWDTT_OK)" 2>/dev/null || true
-
-    # Auto-generate a hash the same way 3s-ui does once cookies exist.
-    # Never invent or submit cookies.
-    if [ "$has_cookies" = "true" ] && [ -z "$(echo "$hashes" | tr -d '[:space:]')" ]; then
-        resp=$(rwx_api POST /api/qwdtt/hashes/generate '{"replaceOldest":false}')
-        if echo "$resp" | jq -e '.response.generatedHash // .response.vkHashes' >/dev/null 2>&1; then
-            echo "$(rwx_msg RWX_QWDTT_HASH_OK)"
-        else
-            echo -e "${COLOR_YELLOW}$(rwx_msg RWX_QWDTT_HASH_WAIT)${COLOR_RESET}"
-        fi
-    elif [ "$has_cookies" != "true" ]; then
-        echo "$(rwx_msg RWX_QWDTT_HASH_WAIT)"
-    fi
     return 0
 }
 
