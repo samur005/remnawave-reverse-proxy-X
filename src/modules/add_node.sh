@@ -1161,6 +1161,13 @@ an_offer_stale_cleanup() {
             done
         fi
 
+
+        if type load_provision_remnawave_x_module >/dev/null 2>&1; then
+            load_provision_remnawave_x_module true || true
+        fi
+        if type run_remnawave_x_turnkey >/dev/null 2>&1; then
+            run_remnawave_x_turnkey "$domain_url" "$token" "$SELFSTEAL_DOMAIN" "${CREATED_NODE_UUID:-${node_uuid:-}}"
+        fi
         echo -e "${COLOR_GREEN}${LANG[NODE_ADDED_SUCCESS]}${COLOR_RESET}"
     fi
 
@@ -1244,6 +1251,13 @@ an_offer_stale_cleanup() {
             for squad_uuid in $squad_uuids; do
                 update_squad "$domain_url" "$token" "$squad_uuid" "$inbound_uuid"
             done
+        fi
+
+        if type load_provision_remnawave_x_module >/dev/null 2>&1; then
+            load_provision_remnawave_x_module true || true
+        fi
+        if type run_remnawave_x_turnkey >/dev/null 2>&1; then
+            run_remnawave_x_turnkey "$domain_url" "$token" "$SELFSTEAL_DOMAIN" "${CREATED_NODE_UUID:-${node_uuid:-}}"
         fi
         echo -e "${COLOR_GREEN}${LANG[NODE_ADDED_SUCCESS]}${COLOR_RESET}"
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPT_VERSION="3.8.4-x.2"
+SCRIPT_VERSION="3.8.4-x.3"
 UPDATE_AVAILABLE=false
 DIR_REMNAWAVE="/usr/local/remnawave_reverse/"
 LANG_FILE="${DIR_REMNAWAVE}selected_language"
@@ -2060,6 +2060,7 @@ load_install_sub_module() { load_module "install_sub" "nginx" "${1:-false}"; }
 load_add_node_module() { load_module "add_node" "modules" "${1:-false}"; }
 load_manage_panel_module() { load_module "manage_panel" "modules" "${1:-false}"; }
 load_edition_module() { load_module "edition" "modules" "${1:-false}"; }
+load_provision_remnawave_x_module() { load_module "provision_remnawave_x" "modules" "${1:-false}"; }
 load_api_module() { load_module "remnawave_api" "api" "${1:-false}"; }
 load_caddy_module() { load_module "install_panel_node" "caddy" "${1:-false}"; }
 load_caddy_panel_module() { load_module "install_panel" "caddy" "${1:-false}"; }
