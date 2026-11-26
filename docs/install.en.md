@@ -1,6 +1,6 @@
 # Installing Remnawave X
 
-A practical guide for the [samur005/remnawave-reverse-proxy-X](https://github.com/samur005/remnawave-reverse-proxy-X) installer (`main` branch, script version `3.8.4-x.3`). This is a fork of the eGames installer: it can deploy official Remnawave or the **Remnawave X** edition with qWDTT.
+A practical guide for the [samur005/remnawave-reverse-proxy-X](https://github.com/samur005/remnawave-reverse-proxy-X) installer (`main` branch, script version `3.8.4-x.4`). This is a fork of the eGames installer: it can deploy official Remnawave or the **Remnawave X** edition with qWDTT.
 
 Русская версия: [install.md](./install.md).
 
@@ -95,13 +95,13 @@ If you installed the **panel and node together** in the Remnawave X edition, the
 2. Binds those inbounds to the node the installer created.
 3. Adds them to the default squad and sets `includeQwdtt`.
 4. Creates hosts on the node’s public domain (the one you entered), including a separate qWDTT host. Remarks distinguish location/protocol, for example `Steal · Trojan`. Private addresses (`10/8`, `172.16/12`, `192.168/16`, `127/8`) are never used.
-5. Assigns the qWDTT sidecar to that node, turns on automatic VK hashes (`autoVkHash`) and, if `subHost` is empty, fills it with the node’s public domain as a fallback.
+5. Assigns the qWDTT sidecar to that node, enables the `autoVkHash` option in the panel and, if `subHost` is empty, fills it with the node’s public domain as a fallback.
 
 If those inbounds or hosts already exist, the script does not duplicate them and does not delete anything. It does not create a test user.
 
-### VK cookies and hashes
+### VK hashes
 
-In 3s-ui, VK **hashes** (calls) are generated automatically once session cookies are stored and `autoVkHash` is on. The installer does not invent cookies (`remixsid`): they are still saved once in the panel’s qWDTT settings. If cookies are already stored, the installer asks the panel to create a hash immediately. Otherwise hashes appear automatically after the cookies are saved.
+VK hashes are created in the panel, in the qWDTT settings. The installer does not generate hashes and does not insert or ask for session cookies (`remixsid`) during install. `autoVkHash` is only enabled as a panel option.
 
 ## qWDTT later (if you need to add something)
 
