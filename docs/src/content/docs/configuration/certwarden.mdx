@@ -18,7 +18,7 @@ import CertwardenDiagram from '../../../components/CertwardenDiagram.astro';
         Where we install
       </div>
       <div style="font-size:.87em;line-height:1.62;opacity:.88;margin-top:.55rem">
-        We will deploy it on the Remnawave panel server. Any other server works too.
+        We will deploy it on the Remnawave X panel server. Any other server works too.
       </div>
     </div>
   </div>
@@ -148,7 +148,7 @@ Cert Warden orders certificates from Let's Encrypt and proves domain ownership w
 ## Installation and configuration of Cert Warden
 
 :::danger[Important]
-We will install **Cert Warden** on the **Remnawave** panel server, but you can install it on any other server. Domain ownership is verified with the DNS-01 method: Cloudflare, Gcore and Bunny.net are covered below.
+We will install **Cert Warden** on the **Remnawave X** panel server, but you can install it on any other server. Domain ownership is verified with the DNS-01 method: Cloudflare, Gcore and Bunny.net are covered below.
 :::
 
 :::danger[Important]
@@ -508,7 +508,7 @@ The fork needs Cert Warden server 0.18.2 or newer. The `ghcr.io/gregtwallace/cer
 If the panel runs behind Caddy, it needs no separate certificate files: Caddy obtains and renews them on its own. The Cert Warden client is then needed for the other services with file certificates, such as the nginx on nodes.
 :::
 
-## Client on the Remnawave panel server
+## Client on the Remnawave X panel server
 
 <Tabs>
 <TabItem label="Official client">
@@ -720,7 +720,7 @@ Another certificate is added with a block of variables with index `1`: `CW_CLIEN
 </TabItem>
 </Tabs>
 
-## Client on the Remnawave node server
+## Client on the Remnawave X node server
 
 :::note
 The client is installed the same way on other nodes that will receive certificates from Cert Warden. You can do without it: on a node server the script itself can issue and renew certificates (item `11` "Manage certificates domain" → "Update current certificates"), and when a node is added through the menu, its certificates are deployed automatically. The Cert Warden client is only needed if you want to distribute all certificates from one place.

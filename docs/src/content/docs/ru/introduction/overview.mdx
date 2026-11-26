@@ -8,15 +8,15 @@ import darkBanner from '../../../../assets/banner.webp';
 import lightBanner from '../../../../assets/banner-black.webp';
 
 <p align="center"><a href="https://github.com/eGamesAPI/remnawave-reverse-proxy">
-    <img src={lightBanner.src} alt="Remnawave Reverse Proxy" class="light-banner" />
-    <img src={darkBanner.src} alt="Remnawave Reverse Proxy" class="dark-banner" />
+    <img src={lightBanner.src} alt="Remnawave X Reverse Proxy" class="light-banner" />
+    <img src={darkBanner.src} alt="Remnawave X Reverse Proxy" class="dark-banner" />
 </a></p>
 
 :::danger[Внимание]
 ЭТОТ РЕПОЗИТОРИЙ - УЧЕБНЫЙ ПРИМЕР ДЛЯ ИЗУЧЕНИЯ NGINX, РЕВЕРС-ПРОКСИ И ОСНОВ СЕТЕВОЙ БЕЗОПАСНОСТИ. ЭТОТ СКРИПТ ДЕМОНСТРИРУЕТ НАСТРОЙКУ NGINX КАК REVERSE PROXY. НЕ ДЛЯ ПРОДА И НЕ ДЛЯ ПРОДАКШН-ИСПОЛЬЗОВАНИЯ! ЕСЛИ ВЫ НЕ ПОНИМАЕТЕ КАК РАБОТАЕТ ПАНЕЛЬ УПРАВЛЕНИЯ - ЭТО ВАШИ ПРОБЛЕМЫ, А НЕ АВТОРА СКРИПТА. ИСПОЛЬЗУЙТЕ НА СВОЙ СТРАХ И РИСК!
 :::
 
-Скрипт ставит панель Remnawave, ноду и обратный прокси на NGINX и Xray одной командой. Xray работает прямо на порту 443 и передаёт трафик NGINX через Unix-сокет: без лишних TCP-звеньев соединения получаются быстрее и надёжнее.
+Скрипт ставит панель Remnawave X, ноду и обратный прокси на NGINX и Xray одной командой. Xray работает прямо на порту 443 и передаёт трафик NGINX через Unix-сокет: без лишних TCP-звеньев соединения получаются быстрее и надёжнее.
 
 :::note[Важно]
 Скрипт работает на Debian и Ubuntu, протестирован на виртуализации KVM. Нужны собственный домен и root на свежеустановленной системе. Подробности собраны на странице [Обязательные требования](/ru/installation/requirements/).

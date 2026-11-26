@@ -1,11 +1,11 @@
 ---
 title: Внешний доступ к API
-description: 'Как открыть API панели Remnawave наружу через nginx и проходить cookie-защиту, TinyAuth или Caddy MFA из внешних клиентов.'
+description: 'Как открыть API панели Remnawave X наружу через nginx и проходить cookie-защиту, TinyAuth или Caddy MFA из внешних клиентов.'
 ---
 
 import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
-Панель Remnawave умеет отдавать свой API внешним клиентам: ботам, панелям управления, статистике. По умолчанию скрипт прячет всё за cookie-защитой или страницей входа, поэтому наружу выходит только то, что вы откроете сами: один `location` в nginx.conf, а дальше любой запрос проходит ту же защиту, что и браузер, плюс токен панели (`Настройки → API-токены`).
+Панель Remnawave X умеет отдавать свой API внешним клиентам: ботам, панелям управления, статистике. По умолчанию скрипт прячет всё за cookie-защитой или страницей входа, поэтому наружу выходит только то, что вы откроете сами: один `location` в nginx.conf, а дальше любой запрос проходит ту же защиту, что и браузер, плюс токен панели (`Настройки → API-токены`).
 
 <div class="not-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem;margin:1.2rem 0 0">
   <div style="display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(0,229,160,.3);border-radius:16px;background:radial-gradient(130% 150% at 0% 0%, rgba(0,229,160,.14), transparent 55%), rgba(0,229,160,.04);box-shadow:0 12px 32px -20px rgba(0,229,160,.5)">
@@ -140,7 +140,7 @@ Caddy ставится в двух видах, и API в них устроен �
 </Tabs>
 
 :::danger[Важно]
-В Remnawave 3.x переключателя `IS_DOCS_ENABLED` больше нет: документация API живёт за `/api/backend-tools` и закрыта кукой, подписанной `APP_SECRET`. Если не хотите отдавать её наружу, закройте этот путь на реверс-прокси.
+В Remnawave X 3.x переключателя `IS_DOCS_ENABLED` больше нет: документация API живёт за `/api/backend-tools` и закрыта кукой, подписанной `APP_SECRET`. Если не хотите отдавать её наружу, закройте этот путь на реверс-прокси.
 :::
 
 ## Прохождение защиты

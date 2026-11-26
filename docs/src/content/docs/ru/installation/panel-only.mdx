@@ -1,6 +1,6 @@
 ---
 title: Только панель
-description: 'Установка панели Remnawave на вашем сервере: что делает установщик и какие данные выводит.'
+description: 'Установка панели Remnawave X на вашем сервере: что делает установщик и какие данные выводит.'
 ---
 
 import { Steps } from '@astrojs/starlight/components';
@@ -36,7 +36,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
 1. **Проверяет сервер перед стартом**: панель ещё не установлена, порт 443 свободен.
 2. **Спрашивает один домен** панели. Он проверяется на корректность и реальность DNS-записи.
 3. **Готовит все секреты самостоятельно**: логин и пароль суперадмина, пару «имя=значение» для секретной ссылки входа, отдельную пару для метрики и `APP_SECRET`. Придумывать и запоминать ничего не нужно: всё будет показано в конце.
-4. **Разворачивает сервисы в `/opt/remnawave`**: база PostgreSQL, кэш Valkey, панель Remnawave и обратный прокси nginx перед ней.
+4. **Разворачивает сервисы в `/opt/remnawave`**: база PostgreSQL, кэш Valkey, панель Remnawave X и обратный прокси nginx перед ней.
 5. **Выпускает сертификат Let's Encrypt** на домен панели выбранным методом (DNS API, ACME HTTP-01 или ваш собственный) и настраивает автопродление.
 6. **Настраивает панель через её API**: регистрирует суперадмина и готовит всё для подключения нод.
 7. **Перезапускает всё начисто** (`down` + `up`): если что-то не поднялось, ошибка не спрячется за зелёным баннером.
@@ -45,14 +45,14 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
 
 <Steps>
 
-1. Выберите пункт `Установка компонентов Remnawave`
+1. Выберите пункт `Установка компонентов Remnawave X`
 
     <Terminal title="root@server: ~" lines={[
       { kind: 'title', text: 'REMNAWAVE REVERSE-PROXY by eGames' },
       { kind: 'dim', text: `Версия: ${APP_VERSION}` },
       { kind: 'dim', text: 'Wiki: https://wiki.egam.es/' },
       { kind: 'plain' },
-      { kind: 'item', num: '1.', text: 'Установка компонентов Remnawave', pick: true },
+      { kind: 'item', num: '1.', text: 'Установка компонентов Remnawave X', pick: true },
       { kind: 'item', num: '2.', text: 'Переустановить панель и компоненты' },
       { kind: 'item', num: '3.', text: 'Управление панелью и компонентами' },
       { kind: 'plain' },
@@ -79,7 +79,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
 2. Затем выберите пункт `Установить только панель`
 
     <Terminal title="root@server: ~" lines={[
-      { kind: 'title', text: 'Установка компонентов Remnawave' },
+      { kind: 'title', text: 'Установка компонентов Remnawave X' },
       { kind: 'plain' },
       { kind: 'item', num: '1.', text: 'Установить панель и ноду на один сервер' },
       { kind: 'item', num: '2.', text: 'Установить панель и страницу подписки' },
@@ -207,7 +207,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
       { kind: 'step', text: 'Для повторного запуска менеджера используйте команду:' },
       { kind: 'ok', text: 'remnawave_reverse' },
       { kind: 'step', text: '=================================================' },
-      { kind: 'err', text: 'Нода добавляется после установки панели: запустите этот скрипт на сервере панели, выберите \'Установка компонентов Remnawave\', а затем \'Добавить ноду в панель\'.' },
+      { kind: 'err', text: 'Нода добавляется после установки панели: запустите этот скрипт на сервере панели, выберите \'Установка компонентов Remnawave X\', а затем \'Добавить ноду в панель\'.' },
     ]} />
 
 </Steps>

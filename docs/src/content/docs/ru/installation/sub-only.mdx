@@ -1,6 +1,6 @@
 ---
 title: Только страница подписки
-description: 'Установка страницы подписки Remnawave на отдельный сервер: что спрашивает установщик и что выводит в конце.'
+description: 'Установка страницы подписки Remnawave X на отдельный сервер: что спрашивает установщик и что выводит в конце.'
 ---
 
 import { Steps, LinkButton } from '@astrojs/starlight/components';
@@ -49,14 +49,14 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
 
 <Steps>
 
-1. Выберите пункт `Установка компонентов Remnawave`
+1. Выберите пункт `Установка компонентов Remnawave X`
 
     <Terminal title="root@server: ~" lines={[
       { kind: 'title', text: 'REMNAWAVE REVERSE-PROXY by eGames' },
       { kind: 'dim', text: `Версия: ${APP_VERSION}` },
       { kind: 'dim', text: 'Wiki: https://wiki.egam.es/' },
       { kind: 'plain' },
-      { kind: 'item', num: '1.', text: 'Установка компонентов Remnawave', pick: true },
+      { kind: 'item', num: '1.', text: 'Установка компонентов Remnawave X', pick: true },
       { kind: 'item', num: '2.', text: 'Переустановить панель и компоненты' },
       { kind: 'item', num: '3.', text: 'Управление панелью и компонентами' },
       { kind: 'plain' },
@@ -83,7 +83,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
 2. Затем выберите пункт `Установить только страницу подписки`
 
     <Terminal title="root@server: ~" lines={[
-      { kind: 'title', text: 'Установка компонентов Remnawave' },
+      { kind: 'title', text: 'Установка компонентов Remnawave X' },
       { kind: 'plain' },
       { kind: 'item', num: '1.', text: 'Установить панель и ноду на один сервер' },
       { kind: 'item', num: '2.', text: 'Установить панель и страницу подписки' },

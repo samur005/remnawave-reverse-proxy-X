@@ -2,6 +2,8 @@
 # Module: Install Panel
 
 install_panel_caddy() {
+    command -v load_edition_module >/dev/null 2>&1 && load_edition_module
+    prompt_remn_edition
     mkdir -p /opt/remnawave && cd /opt/remnawave
 
     reading "${LANG[ENTER_PANEL_DOMAIN]}" PANEL_DOMAIN
@@ -210,7 +212,7 @@ services:
       retries: 3
 
   remnawave:
-    image: remnawave/backend:3
+    image: ${REMN_BACKEND_IMAGE}
     container_name: remnawave
     hostname: remnawave
     <<: [*common, *logging, *env, *networks]
@@ -282,7 +284,7 @@ EOL
         cat >> docker-compose.yml <<EOL
 
   remnawave-subscription-page:
-    image: remnawave/subscription-page:latest
+    image: ${REMN_SUB_IMAGE}
     container_name: remnawave-subscription-page
     hostname: remnawave-subscription-page
     <<: [*common, *logging, *networks]
@@ -343,7 +345,7 @@ EOL
             cookie domain {\$PANEL_DOMAIN}
             ui {
                 links {
-                    "Remnawave" "/dashboard/home" icon "las la-tachometer-alt"
+                    "Remnawave X" "/dashboard/home" icon "las la-tachometer-alt"
                     "My Identity" "/r/whoami" icon "las la-user"
                     "API Keys" "/r/settings/apikeys" icon "las la-key"
                     "MFA" "/r/settings/mfa" icon "lab la-keycdn"
@@ -528,7 +530,7 @@ installation_panel_caddy() {
         sleep 60
     done
 
-    # Register Remnawave
+    # Register Remnawave X
     local token=$(register_remnawave "$domain_url" "$SUPERADMIN_USERNAME" "$SUPERADMIN_PASSWORD")
     case "$token" in
         ey*) ;;
@@ -547,7 +549,7 @@ installation_panel_caddy() {
         # Create API token for subscription page
         create_api_token "$domain_url" "$token" "$target_dir"
 
-        # Stop and start Remnawave Subscription Page
+        # Stop and start Remnawave X Subscription Page
         step_do "${LANG[STOPPING_REMNAWAVE_SUBSCRIPTION_PAGE]}"
         sleep 1
         docker compose down remnawave-subscription-page > /dev/null 2>&1 &

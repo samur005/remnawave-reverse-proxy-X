@@ -6,7 +6,7 @@ description: 'The backup module by distillium: panel and Telegram bot backups, r
 import { Steps } from '@astrojs/starlight/components';
 import Terminal from '../../../components/Terminal.astro';
 
-The `Backup and Restore` entry of the main menu wires in the `remnawave-backup-restore` tool by distillium. It takes a full copy of the Remnawave panel: the PostgreSQL database and the entire installation directory with all of its configuration. The copy can be restored on the same server or deployed on a new one, created manually or on a schedule, and delivered to Telegram, Google Drive or an S3-compatible storage. Old copies clean themselves up according to the retention policy.
+The `Backup and Restore` entry of the main menu wires in the `remnawave-backup-restore` tool by distillium. It takes a full copy of the Remnawave X panel: the PostgreSQL database and the entire installation directory with all of its configuration. The copy can be restored on the same server or deployed on a new one, created manually or on a schedule, and delivered to Telegram, Google Drive or an S3-compatible storage. Old copies clean themselves up according to the retention policy.
 
 <div class="not-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.1rem;margin:1.2rem 0 0">
   <div style="display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(0,229,160,.3);border-radius:16px;background:radial-gradient(130% 150% at 0% 0%, rgba(0,229,160,.14), transparent 55%), rgba(0,229,160,.04);box-shadow:0 12px 32px -20px rgba(0,229,160,.5)">
@@ -17,7 +17,7 @@ The `Backup and Restore` entry of the main menu wires in the `remnawave-backup-r
         Backup &amp; Restore
       </div>
       <div style="font-size:.87em;line-height:1.62;opacity:.88;margin-top:.55rem">
-        Remnawave backups: the database and the whole panel directory, manual or scheduled, with restore on the same or a new server.
+        Remnawave X backups: the database and the whole panel directory, manual or scheduled, with restore on the same or a new server.
       </div>
       <div style="margin-top:auto;padding-top:.75rem;border-top:1px solid rgba(0,229,160,.16)">
         <div style="font-size:.8em;display:grid;grid-template-columns:auto 1fr;gap:.22rem .9rem;align-items:baseline">
@@ -114,7 +114,7 @@ Every later run of entry `7` opens the installed copy straight away through the 
 
     <Terminal title="root@server: ~" lines={[
       { kind: 'plain', text: '[ACTION] Select script operation mode:' },
-      { kind: 'item', num: '1.', text: 'Full (Remnawave Panel + Bot optionally)', pick: true },
+      { kind: 'item', num: '1.', text: 'Full (Remnawave X Panel + Bot optionally)', pick: true },
       { kind: 'item', num: '2.', text: 'Bot Only (if panel is on another server)' },
       { kind: 'plain' },
       { kind: 'input', text: '[?] Your choice: ', answer: '1' },
@@ -146,7 +146,7 @@ Every later run of entry `7` opens the installed copy straight away through the 
 5. Tell the tool where the panel is installed:
 
     <Terminal title="root@server: ~" lines={[
-      { kind: 'plain', text: '[ACTION] Where is your Remnawave panel installed?' },
+      { kind: 'plain', text: '[ACTION] Where is your Remnawave X panel installed?' },
       { kind: 'item', num: '1.', text: '/opt/remnawave', pick: true },
       { kind: 'item', num: '2.', text: '/root/remnawave' },
       { kind: 'item', num: '3.', text: '/opt/stacks/remnawave' },
@@ -204,9 +204,9 @@ The `DB:` line under the version shows the current connection: the `remnawave-db
       { kind: 'dim', text: '[INFO] Creating PostgreSQL dump and compressing...' },
       { kind: 'ok', text: '[SUCCESS] PostgreSQL dump successfully created.' },
       { kind: 'plain' },
-      { kind: 'dim', text: '[INFO] Archiving Remnawave directory...' },
+      { kind: 'dim', text: '[INFO] Archiving Remnawave X directory...' },
       { kind: 'dim', text: '[INFO] Archiving directory /opt/remnawave...' },
-      { kind: 'ok', text: '[SUCCESS] Remnawave directory successfully archived.' },
+      { kind: 'ok', text: '[SUCCESS] Remnawave X directory successfully archived.' },
       { kind: 'plain' },
       { kind: 'ok', text: '[SUCCESS] Final backup archive successfully created: /opt/rw-backup-restore/backup/remnawave_backup_full_2026-10-04_12_00_00.tar.gz' },
       { kind: 'plain' },
@@ -237,7 +237,7 @@ The copy comes with a message describing the scope, size and panel version:
   { kind: 'plain', text: '💾 #backup_success' },
   { kind: 'plain', text: '➖➖➖➖➖➖➖➖➖' },
   { kind: 'plain', text: '✅ Backup successfully created' },
-  { kind: 'plain', text: '🌊 Remnawave: 3.7.0' },
+  { kind: 'plain', text: '🌊 Remnawave X: 3.7.0' },
   { kind: 'plain', text: '🖥️ Panel only' },
   { kind: 'plain', text: '🐳 DB: Docker' },
   { kind: 'plain', text: '📁 DB + directory' },
@@ -418,7 +418,7 @@ Entry `6` opens the tool's configuration:
   { kind: 'item', num: '2.', text: 'Google Drive Settings' },
   { kind: 'item', num: '3.', text: 'S3 Storage Settings' },
   { kind: 'item', num: '4.', text: 'Panel DB Connection' },
-  { kind: 'item', num: '5.', text: 'Remnawave Path' },
+  { kind: 'item', num: '5.', text: 'Remnawave X Path' },
   { kind: 'item', num: '6.', text: 'Backup Retention Policy' },
   { kind: 'item', num: '7.', text: 'Language / Язык' },
   { kind: 'item', num: '8.', text: 'Script auto-update' },

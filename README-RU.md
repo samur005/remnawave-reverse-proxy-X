@@ -2,7 +2,7 @@
  <picture>
    <source media="(prefers-color-scheme: dark)" srcset="./media/logo.png" />
    <source media="(prefers-color-scheme: light)" srcset="./media/logo-black.png" />
-   <img alt="Remnawave Reverse Proxy" src="https://github.com/eGamesAPI/remnawave-reverse-proxy" />
+   <img alt="Remnawave X Reverse Proxy" src="https://github.com/eGamesAPI/remnawave-reverse-proxy" />
  </picture>
 </a></p>
 
@@ -26,7 +26,7 @@
 
 ## Обзор
 
-Скрипт устанавливает панель управления Remnawave, ноды Xray и страницу подписки, а после установки сам становится меню управления сервером: полтора десятка модулей, от правил подписок до резервных копий.
+Скрипт устанавливает панель управления Remnawave X, ноды Xray и страницу подписки, а после установки сам становится меню управления сервером: полтора десятка модулей, от правил подписок до резервных копий.
 
 Обратный прокси поднимается на NGINX или Caddy. Архитектура рассчитана на скорость: Xray занимает порт 443 и передает трафик веб-серверу через Unix-сокет, без лишних сетевых переходов между ними.
 
@@ -77,12 +77,12 @@
 
 Выполните следующую команду для начала установки:
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/eGamesAPI/remnawave-reverse-proxy/refs/heads/main/install_remnawave.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/samur005/remnawave-reverse-proxy-X/refs/heads/main/install_remnawave.sh)
 ```
 
 Если GitHub недоступен, используйте зеркало на jsDelivr:
 ```bash
-bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@main/install_remnawave.sh)
+bash <(curl -Ls https://cdn.jsdelivr.net/gh/samur005/remnawave-reverse-proxy-X@main/install_remnawave.sh)
 ```
 
 <p align="center">
@@ -98,7 +98,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
 | Модуль | Что делает |
 |---|---|
 | [Установка компонентов](https://wiki.egam.es/ru/installation/requirements) | Пять режимов установки и подключение новой ноды к работающей панели |
-| Управление панелью | Статус служб, запуск и остановка, обновление, логи, Remnawave CLI, доступ к панели |
+| Управление панелью | Статус служб, запуск и остановка, обновление, логи, Remnawave X CLI, доступ к панели |
 | [Резервные копии и восстановление](https://wiki.egam.es/ru/configuration/backup-restore) | Копия базы PostgreSQL и конфигураций панели, восстановление на том же или новом сервере, отправка в Telegram, Google Drive и S3, копирование по расписанию |
 | Обновление скрипта | Проверка и установка обновлений, запуск сокращенной командой `rr` |
 
@@ -181,7 +181,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
 <summary><b>Развертывание на одном сервере</b></summary>
 
 1. Запустите скрипт установки
-2. Выберите **"Установка компонентов Remnawave"**
+2. Выберите **"Установка компонентов Remnawave X"**
 3. Выберите **"Установить панель и ноду на один сервер"**
 4. Дождитесь завершения
 5. Скрипт автоматически перезапустит сервисы и отобразит учетные данные для входа
@@ -194,7 +194,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
 **Шаг 1: Настройка сервера панели**
 
 1. Запустите скрипт установки на первом сервере
-2. Выберите **"Установка компонентов Remnawave"**
+2. Выберите **"Установка компонентов Remnawave X"**
 3. Выберите **"Установить только панель"**
 4. Сохраните предоставленные учетные данные
 
@@ -209,7 +209,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
 **Шаг 3: Настройка сервера ноды**
 
 1. Запустите скрипт установки на втором сервере
-2. Выберите **"Установка компонентов Remnawave"**
+2. Выберите **"Установка компонентов Remnawave X"**
 3. Выберите **"Установить только ноду"**
 4. Вставьте ключ при запросе
 5. Дождитесь сообщения об успешном подключении ноды

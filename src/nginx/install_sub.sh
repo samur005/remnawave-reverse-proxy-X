@@ -85,6 +85,8 @@ install_sub_collect() {
 
 # Pure renderer: the whole compose, both services in one document.
 sub_ng_render_compose() {
+    command -v load_edition_module >/dev/null 2>&1 && load_edition_module
+    load_remn_edition
     local panel_url="${SUB_PANEL_URL:-https://$PANEL_DOMAIN}"
     cat <<EOL
 x-common: &common
@@ -113,7 +115,7 @@ services:
 ${SUB_CERT_MOUNTS}
 
   remnawave-subscription-page:
-    image: remnawave/subscription-page:latest
+    image: ${REMN_SUB_IMAGE}
     container_name: remnawave-subscription-page
     hostname: remnawave-subscription-page
     <<: [*common, *logging]

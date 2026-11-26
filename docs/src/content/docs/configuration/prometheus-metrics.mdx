@@ -1,11 +1,11 @@
 ---
 title: Access to Prometheus metrics
-description: 'Remnawave panel metrics: where the connection data lives, how to check the endpoint, and how to set up scraping with vmagent or Prometheus.'
+description: 'Remnawave X panel metrics: where the connection data lives, how to check the endpoint, and how to set up scraping with vmagent or Prometheus.'
 ---
 
 import { FileTree, LinkCard } from '@astrojs/starlight/components';
 
-The Remnawave panel exposes metrics in Prometheus format on a dedicated port `3001`. During installation the script generates a random login and password for them and binds the port to localhost: the address is not reachable from outside the server, which keeps the metrics away from strangers.
+The Remnawave X panel exposes metrics in Prometheus format on a dedicated port `3001`. During installation the script generates a random login and password for them and binds the port to localhost: the address is not reachable from outside the server, which keeps the metrics away from strangers.
 
 <div class="not-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem;margin:1.2rem 0 0">
   <div style="display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(0,229,160,.3);border-radius:16px;background:radial-gradient(130% 150% at 0% 0%, rgba(0,229,160,.14), transparent 55%), rgba(0,229,160,.04);box-shadow:0 12px 32px -20px rgba(0,229,160,.5)">
@@ -68,7 +68,7 @@ The file lives at `/opt/remnawave/.env`; the panel container picks the values up
 | `APP_SECRET` | Signing key for sessions and API tokens | random |
 
 :::note[If the panel was installed without the script]
-In the original Remnawave installation the default values are `admin` and `change_me`. Change them before using the metrics.
+In the original Remnawave X installation the default values are `admin` and `change_me`. Change them before using the metrics.
 :::
 
 ## Quick check

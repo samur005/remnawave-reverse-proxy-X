@@ -2,6 +2,8 @@
 # Module: Install Node Only
 
 install_node_nginx() {
+    command -v load_edition_module >/dev/null 2>&1 && load_edition_module
+    prompt_remn_edition
     # Load selfsteal templates module
     load_selfsteal_templates_module
 
@@ -100,7 +102,7 @@ installation_node() {
     command: sh -c 'rm -f /dev/shm/nginx.sock && exec nginx -g "daemon off;"'
 
   remnanode:
-    image: remnawave/node:latest
+    image: ${REMN_NODE_IMAGE}
     container_name: remnanode
     hostname: remnanode
     <<: [*common, *logging]
@@ -155,6 +157,7 @@ server {
 EOL
 
     ufw allow from $PANEL_IP to any port 2222 > /dev/null 2>&1
+    open_qwdtt_client_ports
     ufw reload > /dev/null 2>&1
 
     echo -e "${COLOR_YELLOW}${LANG[STARTING_NODE]}${COLOR_RESET}"

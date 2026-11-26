@@ -1,12 +1,12 @@
 ---
-title: Как изменить домен в панели Remnawave
-description: 'Пошаговое руководство по замене домена в панели Remnawave: выпуск сертификата, обновление .env, docker-compose и nginx, перенос адресов в панели.'
+title: Как изменить домен в панели Remnawave X
+description: 'Пошаговое руководство по замене домена в панели Remnawave X: выпуск сертификата, обновление .env, docker-compose и nginx, перенос адресов в панели.'
 ---
 
 import { Steps, Tabs, TabItem, FileTree, LinkCard } from '@astrojs/starlight/components';
 import Terminal from '../../../../components/Terminal.astro';
 
-Это руководство поможет изменить текущий домен панели Remnawave (например, `olddomain.com`) на новый (например, `newdomain.com`): выпустить SSL-сертификат, обновить конфигурационные файлы и перенести адреса внутри панели. Если панель работает вместе с нодой, в конце есть дополнительные шаги.
+Это руководство поможет изменить текущий домен панели Remnawave X (например, `olddomain.com`) на новый (например, `newdomain.com`): выпустить SSL-сертификат, обновить конфигурационные файлы и перенести адреса внутри панели. Если панель работает вместе с нодой, в конце есть дополнительные шаги.
 
 <div class="not-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem;margin:1.2rem 0 0">
   <div style="display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(0,229,160,.3);border-radius:16px;background:radial-gradient(130% 150% at 0% 0%, rgba(0,229,160,.14), transparent 55%), rgba(0,229,160,.04);box-shadow:0 12px 32px -20px rgba(0,229,160,.5)">
@@ -371,7 +371,7 @@ import Terminal from '../../../../components/Terminal.astro';
     https://newdomain.com/auth/login?zIdejKtN=MWbLrRzx
     ```
 
-2. Убедитесь, что панель Remnawave загружается корректно и сертификат SSL работает.
+2. Убедитесь, что панель Remnawave X загружается корректно и сертификат SSL работает.
 
 3. Если возникают ошибки, проверьте логи:
 

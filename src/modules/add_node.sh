@@ -713,6 +713,11 @@ an_auto_deploy() {
         else
             echo -e "${COLOR_YELLOW}${LANG[AN_UFW_2222_FAIL]}${COLOR_RESET}" >&2
         fi
+        if re_run_host_n "$host" "ufw allow 56000/tcp comment 'qWDTT DTLS/TCP peer' && ufw allow 56000/udp comment 'qWDTT DTLS/UDP peer' && ufw allow 56001/udp comment 'qWDTT wireguard' && ufw allow 56003/udp comment 'qWDTT raw'" >/dev/null 2>&1; then
+            step_ok "${LANG[AN_UFW_QWDTT_OK]}" >&2
+        else
+            echo -e "${COLOR_YELLOW}${LANG[AN_UFW_QWDTT_FAIL]}${COLOR_RESET}" >&2
+        fi
     else
         echo -e "${COLOR_YELLOW}${LANG[AN_NO_PANEL_IP]}${COLOR_RESET}" >&2
     fi

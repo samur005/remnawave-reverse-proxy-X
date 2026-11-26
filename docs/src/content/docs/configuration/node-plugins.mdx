@@ -1,6 +1,6 @@
 ---
 title: "Node Plugins"
-description: "The Node Plugins module: Torrent Blocker, Ingress Filter and Egress Filter. Blocking torrent traffic, inbound scanners and unwanted outbound traffic through the Remnawave panel"
+description: "The Node Plugins module: Torrent Blocker, Ingress Filter and Egress Filter. Blocking torrent traffic, inbound scanners and unwanted outbound traffic through the Remnawave X panel"
 ---
 
 import { Steps, Aside } from '@astrojs/starlight/components';
@@ -8,7 +8,7 @@ import Terminal from '../../../components/Terminal.astro';
 import { APP_VERSION } from '../../../components/version';
 import NodePluginsDiagram from '../../../components/NodePluginsDiagram.astro';
 
-The `Node Plugins` module configures three built-in Remnawave Node plugins for every node of the panel at once:
+The `Node Plugins` module configures three built-in Remnawave X Node plugins for every node of the panel at once:
 
 <div class="not-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem;margin:1.2rem 0">
   <div style="display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(0,229,160,.3);border-radius:16px;background:radial-gradient(130% 150% at 0% 0%, rgba(0,229,160,.14), transparent 55%), rgba(0,229,160,.04);box-shadow:0 12px 32px -20px rgba(0,229,160,.5)">
@@ -70,7 +70,7 @@ All three features live in a single `Reverse Node Plugins` plugin record, are co
 
 <NodePluginsDiagram lang="en" />
 
-Every Remnawave node has exactly one active plugin (`activePluginUuid`), so the three features cannot be three separate records: only one of them would ever be active. The script keeps one shared record with three config sections: `torrentBlocker`, `ingressFilter` and `egressFilter`.
+Every Remnawave X node has exactly one active plugin (`activePluginUuid`), so the three features cannot be three separate records: only one of them would ever be active. The script keeps one shared record with three config sections: `torrentBlocker`, `ingressFilter` and `egressFilter`.
 
 Every settings change follows the same path:
 
@@ -93,7 +93,7 @@ The panel API caches plugin state for a few seconds. If the menu still shows the
 ## Requirements
 
 :::danger[Important]
-Plugins are configured through the panel API, so run the module on the server with the Remnawave panel installed. On a node-only server the menu entry does not appear.
+Plugins are configured through the panel API, so run the module on the server with the Remnawave X panel installed. On a node-only server the menu entry does not appear.
 :::
 
 Torrent Blocker requires Node v2.7.0 or newer with Xray 26.3.27+.
@@ -115,7 +115,7 @@ remnawave_reverse
       { kind: 'dim', text: `Version: ${APP_VERSION}` },
       { kind: 'dim', text: 'Wiki: https://wiki.egam.es/' },
       { kind: 'plain' },
-      { kind: 'item', num: '1.', text: 'Install Remnawave Components' },
+      { kind: 'item', num: '1.', text: 'Install Remnawave X Components' },
       { kind: 'item', num: '2.', text: 'Reinstall Panel and Components' },
       { kind: 'item', num: '3.', text: 'Manage Panel and Components' },
       { kind: 'plain' },

@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPT_VERSION="3.8.4"
+SCRIPT_VERSION="3.8.4-x.2"
 UPDATE_AVAILABLE=false
 DIR_REMNAWAVE="/usr/local/remnawave_reverse/"
 LANG_FILE="${DIR_REMNAWAVE}selected_language"
@@ -7,7 +7,7 @@ LANG_FILE="${DIR_REMNAWAVE}selected_language"
 # Where this script and its modules/languages are downloaded from.
 # Flip SOURCE_BRANCH to "dev" to point every download at the development
 # branch at once — no other URL in this file mentions the branch.
-SOURCE_REPO="eGamesAPI/remnawave-reverse-proxy"
+SOURCE_REPO="samur005/remnawave-reverse-proxy-X"
 SOURCE_BRANCH="main"
 SOURCE_BASE_URL="https://raw.githubusercontent.com/${SOURCE_REPO}/refs/heads/${SOURCE_BRANCH}"
 
@@ -460,6 +460,18 @@ allow_ssh_ports() {
     [ "$ok" = true ]
 }
 
+# Default qWDTT sidecar listen ports. clientPort (9000) is a client-local
+# setting and must not be opened on the server. If the operator changes
+# listenAddr / wgPort / listenRaw in the panel, open those ports instead.
+open_qwdtt_client_ports() {
+    command -v ufw >/dev/null 2>&1 || return 0
+    ufw allow 56000/tcp comment 'qWDTT DTLS/TCP peer' >/dev/null 2>&1 || true
+    ufw allow 56000/udp comment 'qWDTT DTLS/UDP peer' >/dev/null 2>&1 || true
+    ufw allow 56001/udp comment 'qWDTT wireguard' >/dev/null 2>&1 || true
+    ufw allow 56003/udp comment 'qWDTT raw' >/dev/null 2>&1 || true
+    ufw reload >/dev/null 2>&1 || true
+}
+
 check_os() {
     local os_id os_major
     os_id=$(sed -n 's/^ID=//p' /etc/os-release | head -n 1)
@@ -495,6 +507,13 @@ update_remnawave_reverse() {
     if [ -z "$remote_version" ]; then
         echo -e "${COLOR_YELLOW}${LANG[VERSION_CHECK_FAILED]}${COLOR_RESET}"
         return 1
+    fi
+
+    # A Remnawave X script must not be replaced by the pre-merge fork main
+    # (or any remote without the -x suffix).
+    if [ -n "$remote_version" ] && [[ "$SCRIPT_VERSION" == *-x.* ]] && [[ "$remote_version" != *-x.* ]]; then
+        printf "${COLOR_GREEN}${LANG[LATEST_VERSION]}${COLOR_RESET}\n" "$SCRIPT_VERSION"
+        return 0
     fi
 
     if [ -f "$update_script" ]; then
@@ -878,7 +897,7 @@ panel_needs_v3_migration() {
 panel_image_tag() {
     local compose="${1:-/opt/remnawave}/docker-compose.yml"
     [ -f "$compose" ] || return 1
-    sed -n 's|^[[:space:]]*image:[[:space:]]*remnawave/backend:\([^[:space:]]*\).*|\1|p' "$compose" | head -n 1
+    sed -n -E 's|^[[:space:]]*image:[[:space:]]*(remnawave/backend|ghcr.io/samur005/backend-x):([^[:space:]]+).*|\2|p' "$compose" | head -n 1
 }
 
 # Version to show in the notice, read from the compose tag. Deliberately does
@@ -924,7 +943,7 @@ show_menu() {
     echo -e "${COLOR_GRAY}Wiki: https://wiki.egam.es/${COLOR_RESET}"
     echo -e ""
     show_panel_upgrade_notice
-    echo -e "${COLOR_YELLOW}1. ${LANG[MENU_1]}${COLOR_RESET}" # Install Remnawave Components
+    echo -e "${COLOR_YELLOW}1. ${LANG[MENU_1]}${COLOR_RESET}" # Install Remnawave X Components
     echo -e "${COLOR_YELLOW}2. ${LANG[MENU_2]}${COLOR_RESET}" # Reinstall panel/node
     echo -e "${COLOR_YELLOW}3. ${LANG[MENU_3]}${COLOR_RESET}" # Manage panel/node
     echo -e ""
@@ -1125,7 +1144,7 @@ show_subscriptions_menu() {
     esac
 }
 
-#Manage Install Remnawave Components
+#Manage Install Remnawave X Components
 show_install_menu() {
     echo -e ""
     echo -e "${COLOR_GREEN}${LANG[INSTALL_MENU_TITLE]}${COLOR_RESET}"
@@ -1365,7 +1384,7 @@ manage_install() {
             ;;
     esac
 }
-#Manage Install Remnawave Components
+#Manage Install Remnawave X Components
 
 #Show Reinstall Options
 show_reinstall_options() {
@@ -2040,6 +2059,7 @@ load_install_node_module() { load_module "install_node" "nginx" "${1:-false}"; }
 load_install_sub_module() { load_module "install_sub" "nginx" "${1:-false}"; }
 load_add_node_module() { load_module "add_node" "modules" "${1:-false}"; }
 load_manage_panel_module() { load_module "manage_panel" "modules" "${1:-false}"; }
+load_edition_module() { load_module "edition" "modules" "${1:-false}"; }
 load_api_module() { load_module "remnawave_api" "api" "${1:-false}"; }
 load_caddy_module() { load_module "install_panel_node" "caddy" "${1:-false}"; }
 load_caddy_panel_module() { load_module "install_panel" "caddy" "${1:-false}"; }

@@ -43,14 +43,14 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
 
 <Steps>
 
-1. Select `Install Remnawave Components`
+1. Select `Install Remnawave X Components`
 
     <Terminal title="root@server: ~" lines={[
       { kind: 'title', text: 'REMNAWAVE REVERSE-PROXY by eGames' },
       { kind: 'dim', text: `Version: ${APP_VERSION}` },
       { kind: 'dim', text: 'Wiki: https://wiki.egam.es/' },
       { kind: 'plain' },
-      { kind: 'item', num: '1.', text: 'Install Remnawave Components', pick: true },
+      { kind: 'item', num: '1.', text: 'Install Remnawave X Components', pick: true },
       { kind: 'item', num: '2.', text: 'Reinstall Panel and Components' },
       { kind: 'item', num: '3.', text: 'Manage Panel and Components' },
       { kind: 'plain' },
@@ -77,7 +77,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
 2. Then select `Install panel and subscription page`
 
     <Terminal title="root@server: ~" lines={[
-      { kind: 'title', text: 'Install Remnawave Components' },
+      { kind: 'title', text: 'Install Remnawave X Components' },
       { kind: 'plain' },
       { kind: 'item', num: '1.', text: 'Install panel and node on one server' },
       { kind: 'item', num: '2.', text: 'Install panel and subscription page', pick: true },
@@ -187,8 +187,8 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
     <Terminal title="root@server: ~" lines={[
       { kind: 'step', text: 'Installing panel' },
       { kind: 'step', text: '[ * ] Checking containers availability...' },
-      { kind: 'step', text: '[ * ] Stopping Remnawave Subscription Page...' },
-      { kind: 'step', text: '[ * ] Starting Remnawave Subscription Page...' },
+      { kind: 'step', text: '[ * ] Stopping Remnawave X Subscription Page...' },
+      { kind: 'step', text: '[ * ] Starting Remnawave X Subscription Page...' },
     ]} />
 
 9. When the installation finishes, the script prints everything you need to log into the panel
@@ -207,7 +207,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
       { kind: 'step', text: 'To relaunch the manager, use the following command:' },
       { kind: 'ok', text: 'remnawave_reverse' },
       { kind: 'step', text: '=================================================' },
-      { kind: 'err', text: "The node is added once the panel is up: run this script on the panel server, select 'Install Remnawave Components', then 'Add node to panel'." },
+      { kind: 'err', text: "The node is added once the panel is up: run this script on the panel server, select 'Install Remnawave X Components', then 'Add node to panel'." },
     ]} />
 
 </Steps>

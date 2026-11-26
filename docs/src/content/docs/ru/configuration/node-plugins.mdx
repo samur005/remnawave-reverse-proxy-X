@@ -1,6 +1,6 @@
 ---
 title: "Плагины ноды"
-description: "Модуль плагинов ноды: Torrent Blocker, Ingress Filter и Egress Filter. Блокировка торрент-трафика, входящих сканеров и нежелательного исходящего трафика через панель Remnawave"
+description: "Модуль плагинов ноды: Torrent Blocker, Ingress Filter и Egress Filter. Блокировка торрент-трафика, входящих сканеров и нежелательного исходящего трафика через панель Remnawave X"
 ---
 
 import { Steps, Aside } from '@astrojs/starlight/components';
@@ -8,7 +8,7 @@ import Terminal from '../../../../components/Terminal.astro';
 import { APP_VERSION } from '../../../../components/version';
 import NodePluginsDiagram from '../../../../components/NodePluginsDiagram.astro';
 
-Модуль `Плагины ноды` настраивает три встроенных плагина Remnawave Node сразу для всех нод панели:
+Модуль `Плагины ноды` настраивает три встроенных плагина Remnawave X Node сразу для всех нод панели:
 
 <div class="not-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem;margin:1.2rem 0">
   <div style="display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(0,229,160,.3);border-radius:16px;background:radial-gradient(130% 150% at 0% 0%, rgba(0,229,160,.14), transparent 55%), rgba(0,229,160,.04);box-shadow:0 12px 32px -20px rgba(0,229,160,.5)">
@@ -70,7 +70,7 @@ import NodePluginsDiagram from '../../../../components/NodePluginsDiagram.astro'
 
 <NodePluginsDiagram lang="ru" />
 
-У каждой ноды Remnawave есть ровно один активный плагин (`activePluginUuid`), поэтому три функции не могут быть тремя отдельными записями: активной всегда была бы только одна. Скрипт держит одну общую запись с тремя секциями конфига: `torrentBlocker`, `ingressFilter` и `egressFilter`.
+У каждой ноды Remnawave X есть ровно один активный плагин (`activePluginUuid`), поэтому три функции не могут быть тремя отдельными записями: активной всегда была бы только одна. Скрипт держит одну общую запись с тремя секциями конфига: `torrentBlocker`, `ingressFilter` и `egressFilter`.
 
 Каждое изменение настроек проходит один и тот же путь:
 
@@ -93,7 +93,7 @@ API панели кэширует состояние плагинов на не�
 ## Что понадобится
 
 :::danger[Важно]
-Плагины настраиваются через API панели, поэтому запускать модуль нужно на сервере, где установлена панель Remnawave. На сервере только с нодой пункт меню не появится.
+Плагины настраиваются через API панели, поэтому запускать модуль нужно на сервере, где установлена панель Remnawave X. На сервере только с нодой пункт меню не появится.
 :::
 
 Для Torrent Blocker требуется Node версии 2.7.0 и новее с ядром Xray 26.3.27+.
@@ -115,7 +115,7 @@ remnawave_reverse
       { kind: 'dim', text: `Версия: ${APP_VERSION}` },
       { kind: 'dim', text: 'Wiki: https://wiki.egam.es/' },
       { kind: 'plain' },
-      { kind: 'item', num: '1.', text: 'Установка компонентов Remnawave' },
+      { kind: 'item', num: '1.', text: 'Установка компонентов Remnawave X' },
       { kind: 'item', num: '2.', text: 'Переустановить панель и компоненты' },
       { kind: 'item', num: '3.', text: 'Управление панелью и компонентами' },
       { kind: 'plain' },
