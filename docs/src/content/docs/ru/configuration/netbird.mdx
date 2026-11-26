@@ -9,7 +9,7 @@ import ManualNetbirdDiagram from '../../../../components/ManualNetbirdDiagram.as
 
 Эта инструкция — ручная и подходит всем. Если вы пользуетесь нашим скриптом `remnawave-reverse-proxy`, всё то же самое делает его модуль автоматически: [NetBird: модуль скрипта](/ru/configuration/netbird-module/).
 
-Netbird — это open-source платформа на базе WireGuard, которая позволяет легко создавать защищённые частные сети. В этом руководстве мы разберём, как установить и настроить Netbird для связывания вашей панели Remnawave и последующих нод, чтобы они могли безопасно взаимодействовать друг с другом.
+Netbird — это open-source платформа на базе WireGuard, которая позволяет легко создавать защищённые частные сети. В этом руководстве мы разберём, как установить и настроить Netbird для связывания вашей панели Remnawave X и последующих нод, чтобы они могли безопасно взаимодействовать друг с другом.
 
 
 ## Авторы и проекты
@@ -164,7 +164,7 @@ Netbird — это open-source платформа на базе WireGuard, ко�
 
 </Steps>
 
-## Установка Netbird на сервер панели Remnawave
+## Установка Netbird на сервер панели Remnawave X
 
 <Steps>
 
@@ -179,7 +179,7 @@ Netbird — это open-source платформа на базе WireGuard, ко�
       />
     </div>
 
-2. Установите Netbird на сервере панели Remnawave. Выполните команду для установки Netbird:
+2. Установите Netbird на сервере панели Remnawave X. Выполните команду для установки Netbird:
 
     ```bash
     curl -fsSL https://pkgs.netbird.io/install.sh | sh
@@ -203,21 +203,21 @@ Netbird — это open-source платформа на базе WireGuard, ко�
 
 Вернитесь в панель управления Netbird и перейдите в раздел Peers.
 
-Убедитесь, что peer панели Remnawave отображается как подключённый.
+Убедитесь, что peer панели Remnawave X отображается как подключённый.
 
 ![Netbird peer](https://raw.githubusercontent.com/eGamesAPI/remnawave-reverse-proxy/refs/heads/main/docs/src/assets/ru/netbird/peer_netbird.png)
 
-## Установка Netbird на сервер с нодой Remnawave
+## Установка Netbird на сервер с нодой Remnawave X
 
 Проделайте те же действия установки, что и на [`сервере панели`](https://wiki.egam.es/ru/configuration/netbird/#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-netbird-%D0%BD%D0%B0-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80-%D0%BF%D0%B0%D0%BD%D0%B5%D0%BB%D0%B8-remnawave).
 
-Вернитесь в панель управления Netbird и перейдите в раздел Peers. Убедитесь, что peer ноды Remnawave отображается как подключённый. 
+Вернитесь в панель управления Netbird и перейдите в раздел Peers. Убедитесь, что peer ноды Remnawave X отображается как подключённый. 
 
 ![Netbird peer](https://raw.githubusercontent.com/eGamesAPI/remnawave-reverse-proxy/refs/heads/main/docs/src/assets/ru/netbird/peer_netbird_node.png)
 
-## Настройка брандмауэра (UFW) на сервере ноды Remnawave
+## Настройка брандмауэра (UFW) на сервере ноды Remnawave X
 
-Посмотрите в панели управления Netbird на IP-адрес панели Remnawave (в нашем случае это 100.88.38.121, у вас может быть другой).
+Посмотрите в панели управления Netbird на IP-адрес панели Remnawave X (в нашем случае это 100.88.38.121, у вас может быть другой).
 Выполните команду для открытия порта 2222 (TCP) для этого IP:
 
 ```bash
@@ -230,11 +230,11 @@ ufw allow from 100.88.38.121 to any port 2222 proto tcp
 ufw reload
 ```
 
-## Настройка IP-адреса Netbird в панели Remnawave
+## Настройка IP-адреса Netbird в панели Remnawave X
 
 <Steps>
 
-1. Перейдите в вашу панель Remnawave, зайдите в раздел `Ноды` → `Управление`.
+1. Перейдите в вашу панель Remnawave X, зайдите в раздел `Ноды` → `Управление`.
 
 2. Выберите ноду, где установлен Netbird.
 
@@ -256,11 +256,11 @@ ufw reload
 
 ![Netbird peer](https://raw.githubusercontent.com/eGamesAPI/remnawave-reverse-proxy/refs/heads/main/docs/src/assets/ru/netbird/ip_netbird_node1.png)
 
-Нода теперь подключена к панели Remnawave через Netbird.
+Нода теперь подключена к панели Remnawave X через Netbird.
 Убедитесь, что связь между панелью и нодой работает (например, проверьте доступ по IP через ping или SSH).
 
 ## Итог
 
-- Теперь ваша панель Remnawave и сервер с нодой связаны через защищённый туннель Netbird. 
+- Теперь ваша панель Remnawave X и сервер с нодой связаны через защищённый туннель Netbird. 
 - Вы можете использовать этот канал для безопасного обмена данными или управления нодой через порт 2222. 
 - Netbird упрощает настройку и обеспечивает высокую безопасность благодаря WireGuard.

@@ -11,18 +11,18 @@ const isRu = String(Astro.locals.starlightRoute?.lang ?? 'en').startsWith('ru');
 
 const copy = isRu
   ? {
-      title1: 'Установка Remnawave',
+      title1: 'Установка Remnawave X',
       title2: 'одной',
       titleAccent: 'командой.',
-      lead: 'Интерактивный bash-скрипт: панель Remnawave, Xray-нода, страница подписки и защищённый reverse proxy на Nginx или Caddy — со скрытой панелью управления, SelfSteal и SSL на автомате.',
+      lead: 'Интерактивный bash-скрипт: панель Remnawave X, Xray-нода, страница подписки и защищённый reverse proxy на Nginx или Caddy — со скрытой панелью управления, SelfSteal и SSL на автомате.',
       copyBtn: 'копировать',
       copied: 'скопировано',
     }
   : {
-      title1: 'Deploy Remnawave',
+      title1: 'Deploy Remnawave X',
       title2: 'in',
       titleAccent: 'one command.',
-      lead: 'An interactive bash script: the Remnawave panel, Xray node, subscription page and a hardened Nginx or Caddy reverse proxy — with a hidden control panel, SelfSteal and SSL on autopilot.',
+      lead: 'An interactive bash script: the Remnawave X panel, Xray node, subscription page and a hardened Nginx or Caddy reverse proxy — with a hidden control panel, SelfSteal and SSL on autopilot.',
       copyBtn: 'copy',
       copied: 'copied',
     };
@@ -341,40 +341,40 @@ const INSTALL_CMD =
     const T = isRu
       ? {
           version: 'Версия',
-          menu: ['Установка компонентов Remnawave', 'Переустановить панель/ноду', 'Управление панелью и компонентами',
+          menu: ['Установка компонентов Remnawave X', 'Переустановить панель/ноду', 'Управление панелью и компонентами',
             'Установить случайный шаблон для selfsteal ноды', 'Кастомные расширения от legiz', 'WARP Native',
             'Backup and Restore', 'Управление IPv6', 'Управление сертификатами домена',
             'Проверить обновления скрипта', 'Удалить скрипт'],
           exit: 'Выход',
           fast: 'Быстрый запуск: remnawave_reverse',
           prompt: 'Ваш выбор:',
-          installTitle: 'Установка компонентов Remnawave',
+          installTitle: 'Установка компонентов Remnawave X',
           install: ['Установить панель и ноду на один сервер', 'Установить панель и страницу подписки',
             'Добавить ноду в панель', 'Установить только ноду', 'Установить только панель',
             'Установить только страницу подписки'],
           webserver: 'Выбор веб-сервера:',
           web: ['Nginx', 'Caddy'],
           prog: ['[*] Обновление системных пакетов…', '[*] Установка Docker и compose plugin…',
-            '[*] Получение SSL-сертификата…', '[*] Запуск панели Remnawave…',
+            '[*] Получение SSL-сертификата…', '[*] Запуск панели Remnawave X…',
             '[✓] Готово — данные для входа выше'],
         }
       : {
           version: 'Version',
-          menu: ['Install Remnawave Components', 'Reinstall panel/node', 'Manage Panel and Components',
+          menu: ['Install Remnawave X Components', 'Reinstall panel/node', 'Manage Panel and Components',
             'Install random template for selfsteal node', 'Custom extensions by legiz', 'WARP Native',
             'Backup and Restore', 'Manage IPv6', 'Manage certificates domain',
             'Check for updates script', 'Remove script'],
           exit: 'Exit',
           fast: 'Quick start: remnawave_reverse',
           prompt: 'Enter your choice:',
-          installTitle: 'Install Remnawave Components',
+          installTitle: 'Install Remnawave X Components',
           install: ['Install panel and node on one server', 'Install panel and subscription page',
             'Add node to panel', 'Install only the node', 'Install only the panel',
             'Install only the subscription page'],
           webserver: 'Select web server:',
           web: ['Nginx', 'Caddy'],
           prog: ['[*] Updating system packages…', '[*] Installing Docker & compose plugin…',
-            '[*] Requesting SSL certificate…', '[*] Starting Remnawave panel…',
+            '[*] Requesting SSL certificate…', '[*] Starting Remnawave X panel…',
             '[✓] Done — login details printed above'],
         };
 

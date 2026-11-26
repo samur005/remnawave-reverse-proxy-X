@@ -369,7 +369,7 @@ EOL
             cookie domain {\$PANEL_DOMAIN}
             ui {
                 links {
-                    "Remnawave" "/dashboard/home" icon "las la-tachometer-alt"
+                    "Remnawave X" "/dashboard/home" icon "las la-tachometer-alt"
                     "My Identity" "/r/whoami" icon "las la-user"
                     "API Keys" "/r/settings/apikeys" icon "las la-key"
                     "MFA" "/r/settings/mfa" icon "lab la-keycdn"
@@ -611,7 +611,7 @@ installation_panel_node_caddy() {
         sleep 60
     done
 
-    # Register Remnawave
+    # Register Remnawave X
     local token=$(register_remnawave "$domain_url" "$SUPERADMIN_USERNAME" "$SUPERADMIN_PASSWORD")
     case "$token" in
         ey*) ;;
@@ -653,7 +653,7 @@ installation_panel_node_caddy() {
     # Create API token for subscription page
     create_api_token "$domain_url" "$token" "$target_dir"
 
-    # Stop and start Remnawave
+    # Stop and start Remnawave X
     step_do "${LANG[STOPPING_REMNAWAVE]}"
     sleep 1
     docker compose down > /dev/null 2>&1 &

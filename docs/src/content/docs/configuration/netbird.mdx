@@ -9,7 +9,7 @@ import ManualNetbirdDiagram from '../../../components/ManualNetbirdDiagram.astro
 
 This is the manual guide and it works for everyone. If you use our `remnawave-reverse-proxy` script, its module does all of this automatically: [NetBird: the script module](/configuration/netbird-module/).
 
-Netbird is an open-source platform based on WireGuard that allows you to easily create secure private networks. In this guide, we will walk through how to install and configure Netbird to link your Remnawave panel and nodes so they can communicate securely with each other.
+Netbird is an open-source platform based on WireGuard that allows you to easily create secure private networks. In this guide, we will walk through how to install and configure Netbird to link your Remnawave X panel and nodes so they can communicate securely with each other.
 
 
 ## Authors and projects
@@ -164,7 +164,7 @@ Copy the key and save it in a safe place for future use.
 
 </Steps>
 
-## Installing Netbird on the Panel Server Remnawave
+## Installing Netbird on the Panel Server Remnawave X
 
 <Steps>
 
@@ -179,7 +179,7 @@ Copy the key and save it in a safe place for future use.
       />
     </div>
 
-2. Install Netbird on the Remnawave panel server. Run the command to install Netbird:
+2. Install Netbird on the Remnawave X panel server. Run the command to install Netbird:
 
     ```bash
     curl -fsSL https://pkgs.netbird.io/install.sh | sh
@@ -203,11 +203,11 @@ Copy the key and save it in a safe place for future use.
 
 Return to the Dashboard and go to the Peers section.
 
-Ensure that the Remnawave panel peer is shown as connected.
+Ensure that the Remnawave X panel peer is shown as connected.
 
 ![Netbird peer](https://raw.githubusercontent.com/eGamesAPI/remnawave-reverse-proxy/refs/heads/main/docs/src/assets/en/netbird/peer_netbird.png)
 
-## Installing Netbird on the Node Server Remnawave
+## Installing Netbird on the Node Server Remnawave X
 
 Follow the same installation steps as on the [`panel server`](https://wiki.egam.es/configuration/netbird/#installing-netbird-on-the-panel-server-remnawave).
 
@@ -217,7 +217,7 @@ Return to the Dashboard Netbird and go to the Peers section. Ensure that the nod
 
 ## Configuring the Firewall (UFW) on the Node Server
 
-In the Netbird Dashboard, find the Netbird IP address of the panel Remnawave (in our case, it's 100.88.38.121; yours may be different).
+In the Netbird Dashboard, find the Netbird IP address of the panel Remnawave X (in our case, it's 100.88.38.121; yours may be different).
 Run the command to open port 2222 (TCP) for this IP:
 
 ```bash
@@ -230,11 +230,11 @@ Reload the firewall:
 ufw reload
 ```
 
-## Configuring IP adress Netbird in the Remnawave Panel
+## Configuring IP adress Netbird in the Remnawave X Panel
 
 <Steps>
 
-1. Go to your Remnawave panel, navigate to `Nodes` → `Manage`.
+1. Go to your Remnawave X panel, navigate to `Nodes` → `Manage`.
 
 2. Select the node where Netbird is installed.
 
@@ -256,11 +256,11 @@ ufw reload
 
 ![Netbird peer](https://raw.githubusercontent.com/eGamesAPI/remnawave-reverse-proxy/refs/heads/main/docs/src/assets/en/netbird/ip_netbird_node1.png)
 
-The node is now connected to the Remnawave panel via Netbird.
+The node is now connected to the Remnawave X panel via Netbird.
 Ensure that the connection between the panel and the node is working (e.g., check access via IP with ping or SSH).
 
 ## Summary
 
-- Your Remnawave panel and the node server are now linked through a secure Netbird tunnel.
+- Your Remnawave X panel and the node server are now linked through a secure Netbird tunnel.
 - You can use this channel for secure data exchange or to manage the node via port 2222.
 - Netbird simplifies setup and provides high security through WireGuard.

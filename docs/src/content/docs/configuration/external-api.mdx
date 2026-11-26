@@ -1,11 +1,11 @@
 ---
 title: External access to API
-description: 'How to expose the Remnawave panel API through nginx or Caddy and pass the cookie gate, TinyAuth, or Caddy MFA from external clients.'
+description: 'How to expose the Remnawave X panel API through nginx or Caddy and pass the cookie gate, TinyAuth, or Caddy MFA from external clients.'
 ---
 
 import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
-The Remnawave panel can serve its API to external clients: bots, management panels, statistics tools. By default the script hides everything behind the cookie gate or a login page, so only what you open yourself goes outside: one `location` in nginx.conf, and from then on every request passes the same protection as the browser, plus the panel token (`Settings → API tokens`).
+The Remnawave X panel can serve its API to external clients: bots, management panels, statistics tools. By default the script hides everything behind the cookie gate or a login page, so only what you open yourself goes outside: one `location` in nginx.conf, and from then on every request passes the same protection as the browser, plus the panel token (`Settings → API tokens`).
 
 <div class="not-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem;margin:1.2rem 0 0">
   <div style="display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(0,229,160,.3);border-radius:16px;background:radial-gradient(130% 150% at 0% 0%, rgba(0,229,160,.14), transparent 55%), rgba(0,229,160,.04);box-shadow:0 12px 32px -20px rgba(0,229,160,.5)">
@@ -140,7 +140,7 @@ Caddy comes in two flavors, and the API works differently in each.
 </Tabs>
 
 :::danger[Important]
-Remnawave 3.x no longer has an `IS_DOCS_ENABLED` switch: the API docs live behind `/api/backend-tools`, which the panel gates with a cookie signed by `APP_SECRET`. If you do not want them reachable from outside, keep that path closed on your reverse proxy.
+Remnawave X 3.x no longer has an `IS_DOCS_ENABLED` switch: the API docs live behind `/api/backend-tools`, which the panel gates with a cookie signed by `APP_SECRET`. If you do not want them reachable from outside, keep that path closed on your reverse proxy.
 :::
 
 ## Passing the protection

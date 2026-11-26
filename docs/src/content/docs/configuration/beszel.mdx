@@ -1,6 +1,6 @@
 ---
 title: Beszel Installation
-description: 'Installing Beszel: lightweight server monitoring with Docker metrics, history, and notifications. Works without the Remnawave panel too.'
+description: 'Installing Beszel: lightweight server monitoring with Docker metrics, history, and notifications. Works without the Remnawave X panel too.'
 ---
 
 import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
@@ -127,8 +127,8 @@ The project behind the guide and the author of the page.
 
 The browser opens the hub web panel over https. Agents on the nodes connect to the hub themselves on port 45876: the hub hands them a key when they are added, and it is the agent that initiates the connection, so nothing extra needs to be open on the node except one port for the hub IP. The hub sends notifications via a webhook, for example to Telegram.
 
-:::note[Beszel does not depend on Remnawave]
-The Remnawave panel is not required. It is simply more convenient with it: the wildcard certificate and reverse proxy already exist, and you only add one configuration block.
+:::note[Beszel does not depend on Remnawave X]
+The Remnawave X panel is not required. It is simply more convenient with it: the wildcard certificate and reverse proxy already exist, and you only add one configuration block.
 :::
 
 :::note[If you install without the panel]
@@ -286,7 +286,7 @@ Do not forget to create the DNS record `beszel.example.com` pointing at the hub 
 
 2. Choose the `Binary` connection method.
 
-3. Fill in the agent name and the IP address of the Remnawave node server. The default port (45876) is fine.
+3. Fill in the agent name and the IP address of the Remnawave X node server. The default port (45876) is fine.
 
 4. Press `Copy Linux command` to get the agent installation command.
 

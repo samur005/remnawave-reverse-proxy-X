@@ -526,7 +526,7 @@ docker compose up -d && docker compose logs -f -t
 
 </Steps>
 
-## Installation and configuration of the server with the Remnawave panel
+## Installation and configuration of the server with the Remnawave X panel
 
 <Steps>
 1. Create directories and install cadvisor, node_exporter, vmagent:
@@ -559,13 +559,13 @@ docker compose up -d && docker compose logs -f -t
 
     Insert the following content:
 
-    ```yaml title="cadvisor.yml" "your_instance_name(server Remnawave panel)"
+    ```yaml title="cadvisor.yml" "your_instance_name(server Remnawave X panel)"
     - job_name: integrations/cAdvisor
       scrape_interval: 15s
       static_configs:
         - targets: ['localhost:9101']
           labels:
-            instance: "your_instance_name(server Remnawave panel)"
+            instance: "your_instance_name(server Remnawave X panel)"
     ```
 
 4. Create node_exporter configuration file:
@@ -576,13 +576,13 @@ docker compose up -d && docker compose logs -f -t
 
     Insert the following content:
 
-    ```yaml title="nodeexporter.yml" "your_instance_name(server Remnawave panel)"
+    ```yaml title="nodeexporter.yml" "your_instance_name(server Remnawave X panel)"
     - job_name: integrations/node_exporter
       scrape_interval: 15s
       static_configs:
         - targets: ['localhost:9100']
           labels:
-            instance: "your_instance_name(server Remnawave panel)"
+            instance: "your_instance_name(server Remnawave X panel)"
     ```
 5. Create remnawave panel configuration file:
 
@@ -605,13 +605,13 @@ docker compose up -d && docker compose logs -f -t
     METRICS_PASS=VsCNutHF
     ```
 
-    ```yaml title="remnawave.yml" "your_instance_name(server Remnawave panel)" "xxxxxxx"
+    ```yaml title="remnawave.yml" "your_instance_name(server Remnawave X panel)" "xxxxxxx"
     - job_name: remnawave
       scrape_interval: 15s
       static_configs:
         - targets: ['127.0.0.1:3001']
           labels:
-            instance: "your_instance_name(server Remnawave panel)"
+            instance: "your_instance_name(server Remnawave X panel)"
       basic_auth:
         username: "xxxxxxx"
         password: "xxxxxxx"
@@ -761,7 +761,7 @@ docker compose up -d && docker compose logs -f -t
 
 </Steps>
 
-## Installation and configuration of the server with the Remnawave node
+## Installation and configuration of the server with the Remnawave X node
 
 <Steps>
 
@@ -795,13 +795,13 @@ docker compose up -d && docker compose logs -f -t
 
     Insert the following content:
 
-    ```yaml title="cadvisor.yml" "your_instance_name(server Remnawave node)"
+    ```yaml title="cadvisor.yml" "your_instance_name(server Remnawave X node)"
     - job_name: integrations/cAdvisor
       scrape_interval: 15s
       static_configs:
         - targets: ['localhost:9101']
           labels:
-            instance: "your_instance_name(server Remnawave node)"
+            instance: "your_instance_name(server Remnawave X node)"
     ```
 
 4. Create node_exporter configuration file:
@@ -812,13 +812,13 @@ docker compose up -d && docker compose logs -f -t
 
     Insert the following content:
 
-    ```yaml title="nodeexporter.yml" "your_instance_name(server Remnawave node)"
+    ```yaml title="nodeexporter.yml" "your_instance_name(server Remnawave X node)"
     - job_name: integrations/node_exporter
       scrape_interval: 15s
       static_configs:
         - targets: ['localhost:9100']
           labels:
-            instance: "your_instance_name(server Remnawave node)"
+            instance: "your_instance_name(server Remnawave X node)"
     ```
 
 5. Create cadvisor service file:
@@ -958,7 +958,7 @@ docker compose up -d && docker compose logs -f -t
 
 List of Dashboard:
 
-- [Remnawave Dashboard](https://raw.githubusercontent.com/pluralplay/awesome-docs/main/grafana/dashboards/remnawave-dashboard.json) by [kastov](https://github.com/kastov)
+- [Remnawave X Dashboard](https://raw.githubusercontent.com/pluralplay/awesome-docs/main/grafana/dashboards/remnawave-dashboard.json) by [kastov](https://github.com/kastov)
 - [cAdvisor Dashboard](https://raw.githubusercontent.com/pluralplay/awesome-docs/main/grafana/dashboards/cadvisor.json) by [grafana official](https://github.com/grafana)
 - [Node Overview](https://raw.githubusercontent.com/pluralplay/awesome-docs/main/grafana/dashboards/node-overview.json) by [Kutovoys](https://github.com/Kutovoys)
 - [Network System](https://raw.githubusercontent.com/pluralplay/awesome-docs/main/grafana/dashboards/network.json) by [Kutovoys](https://github.com/Kutovoys)

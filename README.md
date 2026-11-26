@@ -2,7 +2,7 @@
  <picture>
    <source media="(prefers-color-scheme: dark)" srcset="./media/logo.png" />
    <source media="(prefers-color-scheme: light)" srcset="./media/logo-black.png" />
-   <img alt="Remnawave Reverse Proxy" src="https://github.com/eGamesAPI/remnawave-reverse-proxy" />
+   <img alt="Remnawave X Reverse Proxy" src="https://github.com/eGamesAPI/remnawave-reverse-proxy" />
  </picture>
 </a></p>
 
@@ -26,7 +26,7 @@
 
 ## Overview
 
-This script installs the Remnawave control panel, Xray nodes and the subscription page, and after installation it stays on the server as a management menu: a dozen and a half modules, from subscription rules to backups.
+This script installs the Remnawave X control panel, Xray nodes and the subscription page, and after installation it stays on the server as a management menu: a dozen and a half modules, from subscription rules to backups.
 
 The reverse proxy runs on NGINX or Caddy. The architecture is built for speed: Xray takes port 443 and passes traffic to the web server through a Unix socket, with no extra network hops in between.
 
@@ -77,12 +77,12 @@ Prepare three domains or subdomains before installation:
 
 Execute the following command to begin installation:
 ```bash
-bash <(curl -Ls https://raw.githubusercontent.com/samur005/remnawave-reverse-proxy-X/refs/heads/feat/qwdtt/install_remnawave.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/samur005/remnawave-reverse-proxy-X/refs/heads/main/install_remnawave.sh)
 ```
 
 If GitHub is unreachable, use the jsDelivr mirror:
 ```bash
-bash <(curl -Ls https://cdn.jsdelivr.net/gh/samur005/remnawave-reverse-proxy-X@feat/qwdtt/install_remnawave.sh)
+bash <(curl -Ls https://cdn.jsdelivr.net/gh/samur005/remnawave-reverse-proxy-X@main/install_remnawave.sh)
 ```
 
 <p align="center">
@@ -98,7 +98,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/samur005/remnawave-reverse-proxy-X@f
 | Module | What it does |
 |---|---|
 | [Install components](https://wiki.egam.es/installation/requirements) | Five installation modes plus connecting a new node to a running panel |
-| Panel management | Service status, start and stop, updates, logs, Remnawave CLI, panel access |
+| Panel management | Service status, start and stop, updates, logs, Remnawave X CLI, panel access |
 | [Backup and restore](https://wiki.egam.es/configuration/backup-restore) | PostgreSQL database and panel configuration backup, restore on the same or a new server, delivery to Telegram, Google Drive and S3, scheduled copies |
 | Script updates | Update check and installation, runs as the short `rr` command |
 
@@ -181,7 +181,7 @@ Along the way the script asks for the interface language, the web server (NGINX 
 <summary><b>Single server deployment</b></summary>
 
 1. Run the installation script
-2. Select **"Install Remnawave Components"**
+2. Select **"Install Remnawave X Components"**
 3. Select **"Install panel and node on one server"**
 4. Wait for completion
 5. The script will automatically restart services and display login credentials
@@ -194,7 +194,7 @@ Along the way the script asks for the interface language, the web server (NGINX 
 **Step 1: Panel Server Setup**
 
 1. Run the installation script on the first server
-2. Select **"Install Remnawave Components"**
+2. Select **"Install Remnawave X Components"**
 3. Select **"Install panel only"**
 4. Save the provided credentials
 
@@ -209,7 +209,7 @@ Along the way the script asks for the interface language, the web server (NGINX 
 **Step 3: Node Server Setup**
 
 1. Run the installation script on the second server
-2. Select **"Install Remnawave Components"**
+2. Select **"Install Remnawave X Components"**
 3. Select **"Install node only"**
 4. Paste the key when prompted
 5. Confirm the successful node connection message

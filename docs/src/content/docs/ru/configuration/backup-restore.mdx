@@ -6,7 +6,7 @@ description: 'Модуль бэкапа от distillium: резервные ко
 import { Steps } from '@astrojs/starlight/components';
 import Terminal from '../../../../components/Terminal.astro';
 
-Пункт `Backup and Restore` главного меню подключает инструмент distillium `remnawave-backup-restore`. Он снимает резервную копию всей панели Remnawave: базу PostgreSQL и директорию установки со всеми конфигурациями. Копию можно вернуть на тот же сервер или развернуть на новом, делать вручную или по расписанию, отправлять в Telegram, Google Drive или S3-хранилище. Старые копии подчищаются сами по политике хранения.
+Пункт `Backup and Restore` главного меню подключает инструмент distillium `remnawave-backup-restore`. Он снимает резервную копию всей панели Remnawave X: базу PostgreSQL и директорию установки со всеми конфигурациями. Копию можно вернуть на тот же сервер или развернуть на новом, делать вручную или по расписанию, отправлять в Telegram, Google Drive или S3-хранилище. Старые копии подчищаются сами по политике хранения.
 
 <div class="not-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.1rem;margin:1.2rem 0 0">
   <div style="display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(0,229,160,.3);border-radius:16px;background:radial-gradient(130% 150% at 0% 0%, rgba(0,229,160,.14), transparent 55%), rgba(0,229,160,.04);box-shadow:0 12px 32px -20px rgba(0,229,160,.5)">
@@ -17,7 +17,7 @@ import Terminal from '../../../../components/Terminal.astro';
         Backup &amp; Restore
       </div>
       <div style="font-size:.87em;line-height:1.62;opacity:.88;margin-top:.55rem">
-        Резервные копии Remnawave: база данных и директория панели целиком, вручную и по расписанию, с восстановлением на тот же или новый сервер.
+        Резервные копии Remnawave X: база данных и директория панели целиком, вручную и по расписанию, с восстановлением на тот же или новый сервер.
       </div>
       <div style="margin-top:auto;padding-top:.75rem;border-top:1px solid rgba(0,229,160,.16)">
         <div style="font-size:.8em;display:grid;grid-template-columns:auto 1fr;gap:.22rem .9rem;align-items:baseline">
@@ -114,7 +114,7 @@ remnawave_reverse
 
     <Terminal title="root@server: ~" lines={[
       { kind: 'plain', text: '[ACTION] Выберите режим работы скрипта:' },
-      { kind: 'item', num: '1.', text: 'Полный (Панель Remnawave + Бот опционально)', pick: true },
+      { kind: 'item', num: '1.', text: 'Полный (Панель Remnawave X + Бот опционально)', pick: true },
       { kind: 'item', num: '2.', text: 'Только Бот (если панель установлена на другом сервере)' },
       { kind: 'plain' },
       { kind: 'input', text: '[?] Ваш выбор: ', answer: '1' },
@@ -146,7 +146,7 @@ remnawave_reverse
 5. Укажите, где установлена панель:
 
     <Terminal title="root@server: ~" lines={[
-      { kind: 'plain', text: '[ACTION] Где установлена/устанавливается ваша панель Remnawave?' },
+      { kind: 'plain', text: '[ACTION] Где установлена/устанавливается ваша панель Remnawave X?' },
       { kind: 'item', num: '1.', text: '/opt/remnawave', pick: true },
       { kind: 'item', num: '2.', text: '/root/remnawave' },
       { kind: 'item', num: '3.', text: '/opt/stacks/remnawave' },
@@ -204,9 +204,9 @@ remnawave_reverse
       { kind: 'dim', text: '[INFO] Создание PostgreSQL дампа и сжатие в файл...' },
       { kind: 'ok', text: '[SUCCESS] Дамп PostgreSQL успешно создан.' },
       { kind: 'plain' },
-      { kind: 'dim', text: '[INFO] Архивирование директории Remnawave...' },
+      { kind: 'dim', text: '[INFO] Архивирование директории Remnawave X...' },
       { kind: 'dim', text: '[INFO] Архивирование директории /opt/remnawave...' },
-      { kind: 'ok', text: '[SUCCESS] Директория Remnawave успешно заархивирована.' },
+      { kind: 'ok', text: '[SUCCESS] Директория Remnawave X успешно заархивирована.' },
       { kind: 'plain' },
       { kind: 'ok', text: '[SUCCESS] Итоговый архив бэкапа успешно создан: /opt/rw-backup-restore/backup/remnawave_backup_full_2026-10-04_12_00_00.tar.gz' },
       { kind: 'plain' },
@@ -237,7 +237,7 @@ remnawave_reverse
   { kind: 'plain', text: '💾 #backup_success' },
   { kind: 'plain', text: '➖➖➖➖➖➖➖➖➖' },
   { kind: 'plain', text: '✅ Бэкап успешно создан' },
-  { kind: 'plain', text: '🌊 Remnawave: 3.7.0' },
+  { kind: 'plain', text: '🌊 Remnawave X: 3.7.0' },
   { kind: 'plain', text: '🖥️ Только панель' },
   { kind: 'plain', text: '🐳 БД: Docker' },
   { kind: 'plain', text: '📁 БД + директория' },
@@ -418,7 +418,7 @@ remnawave_reverse
   { kind: 'item', num: '2.', text: 'Настройки Google Drive' },
   { kind: 'item', num: '3.', text: 'Настройки S3 Storage' },
   { kind: 'item', num: '4.', text: 'Подключение к БД панели' },
-  { kind: 'item', num: '5.', text: 'Путь Remnawave' },
+  { kind: 'item', num: '5.', text: 'Путь Remnawave X' },
   { kind: 'item', num: '6.', text: 'Политика хранения бэкапов' },
   { kind: 'item', num: '7.', text: 'Язык / Language' },
   { kind: 'item', num: '8.', text: 'Автообновление скрипта' },

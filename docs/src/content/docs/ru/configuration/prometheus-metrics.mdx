@@ -1,11 +1,11 @@
 ---
 title: Доступ к метрикам Prometheus
-description: 'Метрики панели Remnawave: где лежат данные подключения, как проверить эндпоинт и настроить сбор в vmagent или Prometheus.'
+description: 'Метрики панели Remnawave X: где лежат данные подключения, как проверить эндпоинт и настроить сбор в vmagent или Prometheus.'
 ---
 
 import { FileTree, LinkCard } from '@astrojs/starlight/components';
 
-Панель Remnawave отдаёт метрики в формате Prometheus на отдельном порту `3001`. Скрипт при установке сам генерирует логин и пароль для них и прибивает порт к localhost: снаружи сервера адрес не виден, и это защищает метрики от посторонних.
+Панель Remnawave X отдаёт метрики в формате Prometheus на отдельном порту `3001`. Скрипт при установке сам генерирует логин и пароль для них и прибивает порт к localhost: снаружи сервера адрес не виден, и это защищает метрики от посторонних.
 
 <div class="not-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem;margin:1.2rem 0 0">
   <div style="display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(0,229,160,.3);border-radius:16px;background:radial-gradient(130% 150% at 0% 0%, rgba(0,229,160,.14), transparent 55%), rgba(0,229,160,.04);box-shadow:0 12px 32px -20px rgba(0,229,160,.5)">
@@ -68,7 +68,7 @@ METRICS_PASS=VsCNutHF
 | `APP_SECRET` | Ключ подписи сессий и API-токенов | случайный |
 
 :::note[Если панель ставилась без скрипта]
-В оригинальной установке Remnawave значения по умолчанию `admin` и `change_me`. Обязательно смените их перед использованием метрик.
+В оригинальной установке Remnawave X значения по умолчанию `admin` и `change_me`. Обязательно смените их перед использованием метрик.
 :::
 
 ## Быстрая проверка

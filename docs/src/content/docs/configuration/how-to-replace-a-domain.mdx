@@ -1,11 +1,11 @@
 ---
-title: How to replace a domain in the Remnawave panel
-description: Step-by-step guide to replacing a domain in the Remnawave panel, including generating an SSL certificate and updating configuration files.
+title: How to replace a domain in the Remnawave X panel
+description: Step-by-step guide to replacing a domain in the Remnawave X panel, including generating an SSL certificate and updating configuration files.
 ---
 
 import { Aside, Steps, Tabs, TabItem, FileTree, Code, LinkCard } from '@astrojs/starlight/components';
 
-This guide will help you change the current domain of the Remnawave panel (for example, `olddomain.com`) to a new one (for example, `newdomain.com`): issue an SSL certificate, update the configuration files, and move the addresses inside the panel. If the panel runs together with a node, extra steps wait at the end.
+This guide will help you change the current domain of the Remnawave X panel (for example, `olddomain.com`) to a new one (for example, `newdomain.com`): issue an SSL certificate, update the configuration files, and move the addresses inside the panel. If the panel runs together with a node, extra steps wait at the end.
 
 <div class="not-content" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem;margin:1.2rem 0 0">
   <div style="display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(0,229,160,.3);border-radius:16px;background:radial-gradient(130% 150% at 0% 0%, rgba(0,229,160,.14), transparent 55%), rgba(0,229,160,.04);box-shadow:0 12px 32px -20px rgba(0,229,160,.5)">
@@ -91,7 +91,7 @@ To use the new domain, you need to generate a new SSL certificate using the scri
 
 **Updating configuration files**
 
-After generating the certificate, update the domain in the Remnawave panel configuration files.
+After generating the certificate, update the domain in the Remnawave X panel configuration files.
 
 <Steps>
 
@@ -235,7 +235,7 @@ To use the new domain, you need to generate a new SSL certificate using the scri
 
 **Updating configuration files**
 
-After generating the certificate, update the domain in the Remnawave panel configuration files.
+After generating the certificate, update the domain in the Remnawave X panel configuration files.
 
 <Steps>
 
@@ -348,7 +348,7 @@ After generating the certificate, update the domain in the Remnawave panel confi
 
 11. Go to the browser address that the script provided
 
-12. Enter the Remnawave panel and go to the Nodes --> Management section
+12. Enter the Remnawave X panel and go to the Nodes --> Management section
 
 13. Select your node (Steal)
 
@@ -400,7 +400,7 @@ After generating the certificate, update the domain in the Remnawave panel confi
     https://newdomain.com/auth/login?MdAGAnCL=ExnqGvcX
     ```
 
-2. Make sure the Remnawave panel loads correctly and the SSL certificate works.
+2. Make sure the Remnawave X panel loads correctly and the SSL certificate works.
 
 3. If errors occur, check the logs:
 

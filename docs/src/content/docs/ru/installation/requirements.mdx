@@ -1,6 +1,6 @@
 ---
 title: Обязательные требования
-description: 'Подготовка к установке компонентов Remnawave: серверы, домены и DNS-записи.'
+description: 'Подготовка к установке компонентов Remnawave X: серверы, домены и DNS-записи.'
 ---
 
 import { LinkCard } from '@astrojs/starlight/components';
@@ -16,7 +16,7 @@ import { APP_VERSION } from '../../../../components/version';
     <div style="padding:1rem 1.2rem 1.15rem">
       <div style="display:flex;align-items:center;gap:.55rem;font-weight:700;font-size:1.04em">
         <span style="width:9px;height:9px;border-radius:50%;background:#00e5a0;box-shadow:0 0 8px rgba(0,229,160,.7);flex:none"></span>
-        Панель Remnawave
+        Панель Remnawave X
       </div>
       <div style="font-size:.87em;line-height:1.62;opacity:.88;margin-top:.55rem">
         Подходит любая ветка 3.x: если скрипт встретит старую панель, он предупредит при запуске.
@@ -53,7 +53,7 @@ import { APP_VERSION } from '../../../../components/version';
     <div style="padding:1rem 1.2rem 1.15rem">
       <div style="display:flex;align-items:center;gap:.55rem;font-weight:700;font-size:1.04em">
         <span style="width:9px;height:9px;border-radius:50%;background:#00e5a0;box-shadow:0 0 8px rgba(0,229,160,.7);flex:none"></span>
-        Remnawave Panel
+        Remnawave X Panel
       </div>
       <div style="font-size:.87em;line-height:1.62;opacity:.88;margin-top:.55rem">
         Сервер панели: веб-интерфейс, база данных и фоновые задачи.
@@ -71,7 +71,7 @@ import { APP_VERSION } from '../../../../components/version';
     <div style="padding:1rem 1.2rem 1.15rem">
       <div style="display:flex;align-items:center;gap:.55rem;font-weight:700;font-size:1.04em">
         <span style="width:9px;height:9px;border-radius:50%;background:#bc8cff;box-shadow:0 0 8px rgba(188,140,255,.7);flex:none"></span>
-        Remnawave Node
+        Remnawave X Node
       </div>
       <div style="font-size:.87em;line-height:1.62;opacity:.88;margin-top:.55rem">
         На ноде живёт Xray-core, поэтому требования ниже, чем у панели.
@@ -86,7 +86,7 @@ import { APP_VERSION } from '../../../../components/version';
 </div>
 
 :::tip[Если железо слабее]
-`Remnawave` может работать и на меньших мощностях, но это не рекомендуется: некоторые фоновые процессы прожорливы до ресурсов. `Remnawave Node` сама по себе нетребовательна, но Xray-core под нагрузкой может съедать много CPU и RAM.
+`Remnawave X` может работать и на меньших мощностях, но это не рекомендуется: некоторые фоновые процессы прожорливы до ресурсов. `Remnawave X Node` сама по себе нетребовательна, но Xray-core под нагрузкой может съедать много CPU и RAM.
 :::
 
 ## Что нужно подготовить
@@ -224,4 +224,4 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/eGamesAPI/remnawave-reverse-proxy@ma
 
 ---
 
-<LinkCard title="Установка компонентов Remnawave" href="/ru/installation/panel-and-node/" description="Все способы установки: панель, нода, вместе, страница подписки и добавление ноды." />
+<LinkCard title="Установка компонентов Remnawave X" href="/ru/installation/panel-and-node/" description="Все способы установки: панель, нода, вместе, страница подписки и добавление ноды." />

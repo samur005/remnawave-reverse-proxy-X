@@ -8,7 +8,7 @@ LANG_FILE="${DIR_REMNAWAVE}selected_language"
 # Flip SOURCE_BRANCH to "dev" to point every download at the development
 # branch at once — no other URL in this file mentions the branch.
 SOURCE_REPO="samur005/remnawave-reverse-proxy-X"
-SOURCE_BRANCH="feat/qwdtt"
+SOURCE_BRANCH="main"
 SOURCE_BASE_URL="https://raw.githubusercontent.com/${SOURCE_REPO}/refs/heads/${SOURCE_BRANCH}"
 
 SCRIPT_URL="${SOURCE_BASE_URL}/install_remnawave.sh"
@@ -509,7 +509,7 @@ update_remnawave_reverse() {
         return 1
     fi
 
-    # A Remnawave-X script must not be replaced by the pre-merge fork main
+    # A Remnawave X script must not be replaced by the pre-merge fork main
     # (or any remote without the -x suffix).
     if [ -n "$remote_version" ] && [[ "$SCRIPT_VERSION" == *-x.* ]] && [[ "$remote_version" != *-x.* ]]; then
         printf "${COLOR_GREEN}${LANG[LATEST_VERSION]}${COLOR_RESET}\n" "$SCRIPT_VERSION"
@@ -943,7 +943,7 @@ show_menu() {
     echo -e "${COLOR_GRAY}Wiki: https://wiki.egam.es/${COLOR_RESET}"
     echo -e ""
     show_panel_upgrade_notice
-    echo -e "${COLOR_YELLOW}1. ${LANG[MENU_1]}${COLOR_RESET}" # Install Remnawave Components
+    echo -e "${COLOR_YELLOW}1. ${LANG[MENU_1]}${COLOR_RESET}" # Install Remnawave X Components
     echo -e "${COLOR_YELLOW}2. ${LANG[MENU_2]}${COLOR_RESET}" # Reinstall panel/node
     echo -e "${COLOR_YELLOW}3. ${LANG[MENU_3]}${COLOR_RESET}" # Manage panel/node
     echo -e ""
@@ -1144,7 +1144,7 @@ show_subscriptions_menu() {
     esac
 }
 
-#Manage Install Remnawave Components
+#Manage Install Remnawave X Components
 show_install_menu() {
     echo -e ""
     echo -e "${COLOR_GREEN}${LANG[INSTALL_MENU_TITLE]}${COLOR_RESET}"
@@ -1384,7 +1384,7 @@ manage_install() {
             ;;
     esac
 }
-#Manage Install Remnawave Components
+#Manage Install Remnawave X Components
 
 #Show Reinstall Options
 show_reinstall_options() {

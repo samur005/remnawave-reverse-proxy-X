@@ -7,15 +7,15 @@ import { Steps } from '@astrojs/starlight/components';
 import { LinkButton } from '@astrojs/starlight/components';
 
 Автор: **[OMchik33](../../contribution/resources#omchik33)**  
-Полная инструкция по настройке мониторинга панели [Remnawave](https://remna.st) с помощью Prometheus, Grafana и Node Exporter, а также безопасного доступа к метрикам через SSH-туннель и Nginx.
+Полная инструкция по настройке мониторинга панели [Remnawave X](https://remna.st) с помощью Prometheus, Grafana и Node Exporter, а также безопасного доступа к метрикам через SSH-туннель и Nginx.
 
 :::danger[Важно]
 Инструкция описывает "упрощенную/базовую" установку сервисов на __отдельный__ мониторинговый VPS сервер. Описан вариант действий из-под пользователя root
 :::
 
-## 📦 Настройка `docker-compose.yml` на сервере с Remnawave
+## 📦 Настройка `docker-compose.yml` на сервере с Remnawave X
 
-Убедитесь, что в `docker-compose.yml` Remnawave открыт порт `3001`, по которому отдаются метрики:
+Убедитесь, что в `docker-compose.yml` Remnawave X открыт порт `3001`, по которому отдаются метрики:
 
 ```yaml
 ports:
@@ -55,7 +55,7 @@ remnawave:
 ## 🔐 Настройка SSH-туннеля
 
 :::note
-Туннель нужен если метрики закрыты по куки авторизации, например при установке Remnawave по скрипту eGames
+Туннель нужен если метрики закрыты по куки авторизации, например при установке Remnawave X по скрипту eGames
 :::
 
 :::caution
@@ -70,7 +70,7 @@ remnawave:
     ssh-keygen -t ed25519 -f ~/.ssh/remna_tunnel_key
     ```
 
-2. Добавление публичного ключа на сервере с Remnawave, в файл `~/.ssh/authorized_keys`. Вместо `AAAAC3...` вставьте содержимое `remna_tunnel_key.pub`, начинающееся на `AAAAC3`:
+2. Добавление публичного ключа на сервере с Remnawave X, в файл `~/.ssh/authorized_keys`. Вместо `AAAAC3...` вставьте содержимое `remna_tunnel_key.pub`, начинающееся на `AAAAC3`:
 
     ```bash
     from="IP_мониторингового_сервера",no-pty,no-agent-forwarding,no-X11-forwarding,command="/bin/false" ssh-ed25519 AAAAC3... remna_tunnel_key
@@ -82,11 +82,11 @@ remnawave:
     sudo apt install autossh
     ```
 
-4. Создание systemd-сервиса `/etc/systemd/system/remna-tunnel.service`. Замените `remnauser@REMNA_SERVER_IP`, это ssh логин и адрес сервера панели Remnawave.
+4. Создание systemd-сервиса `/etc/systemd/system/remna-tunnel.service`. Замените `remnauser@REMNA_SERVER_IP`, это ssh логин и адрес сервера панели Remnawave X.
 
     ```ini
     [Unit]
-    Description=SSH tunnel to Remnawave for Prometheus and Node Exporter
+    Description=SSH tunnel to Remnawave X for Prometheus and Node Exporter
     After=network.target
 
     [Service]
@@ -105,7 +105,7 @@ remnawave:
     WantedBy=multi-user.target
     ```
 
-5. На первом сервере (где запускается autossh) важно добавить ключ второго сервера в known_hosts, где 12.345.678.91 - IP адрес панели Remnawave, чтобы избежать ошибки проверки подлинности хоста, иначе служба просто не будет подключаться к серверу с панелью.
+5. На первом сервере (где запускается autossh) важно добавить ключ второго сервера в known_hosts, где 12.345.678.91 - IP адрес панели Remnawave X, чтобы избежать ошибки проверки подлинности хоста, иначе служба просто не будет подключаться к серверу с панелью.
 
     ```bash
     ssh-keyscan -H 12.345.678.91 >> ~/.ssh/known_hosts
@@ -127,7 +127,7 @@ remnawave:
 
 </Steps>
 
-Теперь метрики Remnawave и Node Exporter доступны по `http://localhost:9001/metrics` и `http://localhost:9002/metrics` на мониторинговом сервере.
+Теперь метрики Remnawave X и Node Exporter доступны по `http://localhost:9001/metrics` и `http://localhost:9002/metrics` на мониторинговом сервере.
 
 ## 📈 Установка Prometheus и Grafana
 
@@ -200,7 +200,7 @@ remnawave:
 
 <Steps>
 
-1. Файл `/opt/monitoring/prometheus/prometheus.yml`. `username` и `password` из `.env` файла Remnawave (секция `### PROMETHEUS ###`)
+1. Файл `/opt/monitoring/prometheus/prometheus.yml`. `username` и `password` из `.env` файла Remnawave X (секция `### PROMETHEUS ###`)
 
     ```yaml
     global:
@@ -490,7 +490,7 @@ http {
 
 <Steps>
 
-1. Установка на сервер с Remnawave:
+1. Установка на сервер с Remnawave X:
 
     ```bash
     . <(wget -qO- https://raw.githubusercontent.com/g7AzaZLO/NodeExporter-autoinstaller/main/NodeExporter-auto-install.sh)
