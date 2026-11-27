@@ -23,6 +23,7 @@ rwx_msg() {
             RWX_PROVISION_SKIP) fmt="Remnawave X turnkey setup skipped (Official edition or no node)" ;;
             RWX_PROVISION_FAIL) fmt="Remnawave X turnkey setup could not finish: %s (the panel itself is up)" ;;
             RWX_PROVISION_PRIVATE) fmt="Public node address %s is private — hosts were not created with that address" ;;
+            RWX_PROVISION_NO_PANEL) fmt="Remnawave X turnkey setup needs the panel on this server" ;;
             RWX_INBOUNDS_OK) fmt="Managed inbounds are present in the config profile" ;;
             RWX_NODE_BIND_OK) fmt="Managed inbounds are bound to node %s" ;;
             RWX_SQUAD_OK) fmt="Default squad includes the managed inbounds and qWDTT" ;;
@@ -353,11 +354,15 @@ provision_remnawave_x_turnkey_body() {
         return 1
     fi
 
-    if ! rwx_is_private_address "$public_host"; then
-        :
-    else
-        echo -e "${COLOR_YELLOW}$(rwx_msg RWX_PROVISION_PRIVATE "$public_host")${COLOR_RESET}"
-        public_host=""
+    if [ -z "$public_host" ] || rwx_is_private_address "$public_host"; then
+        local node_addr
+        node_addr=$(echo "$node_json" | jq -r '.address // empty')
+        if [ -n "$node_addr" ] && ! rwx_is_private_address "$node_addr"; then
+            public_host="$node_addr"
+        elif [ -n "$public_host" ]; then
+            echo -e "${COLOR_YELLOW}$(rwx_msg RWX_PROVISION_PRIVATE "$public_host")${COLOR_RESET}"
+            public_host=""
+        fi
     fi
 
     local profiles_json config_json taken extra_json new_config
@@ -668,4 +673,82 @@ run_remnawave_x_turnkey() {
         return 0
     fi
     provision_remnawave_x_turnkey "$domain_url" "$token" "$public_host" "$node_uuid" || true
+}
+
+# Public node domain saved on a combined panel+node box (Caddy compose
+# or the nginx selfsteal server_name). Used when turnkey setup is run
+# later from the menu and SELFSTEAL_DOMAIN is no longer in the shell.
+rwx_local_public_host() {
+    local dir="${1:-/opt/remnawave}"
+    local val="" panel="" sub="" conf name
+
+    if [ -f "$dir/docker-compose.yml" ]; then
+        val=$(sed -n -E 's/.*SELF_STEAL_DOMAIN=//p' "$dir/docker-compose.yml" | head -n1 | tr -d ' "\047')
+        if [ -n "$val" ] && [[ "$val" != *'${'* ]]; then
+            printf '%s' "$val"
+            return 0
+        fi
+    fi
+    if [ -f "$dir/.env" ]; then
+        val=$(sed -n -E 's/^(SELFSTEAL_DOMAIN|SELF_STEAL_DOMAIN)=//p' "$dir/.env" | head -n1 | tr -d ' "\047')
+        if [ -n "$val" ] && [[ "$val" != *'${'* ]]; then
+            printf '%s' "$val"
+            return 0
+        fi
+        panel=$(sed -n 's/^PANEL_DOMAIN=//p' "$dir/.env" | head -n1 | tr -d ' "\047')
+        sub=$(sed -n 's/^SUB_PUBLIC_DOMAIN=//p' "$dir/.env" | head -n1 | tr -d ' "\047')
+    fi
+    conf="$dir/nginx.conf"
+    if [ -f "$conf" ]; then
+        while read -r name; do
+            [ -n "$name" ] || continue
+            [ "$name" = "_" ] && continue
+            [ -n "$panel" ] && [ "$name" = "$panel" ] && continue
+            [ -n "$sub" ] && [ "$name" = "$sub" ] && continue
+            printf '%s' "$name"
+            return 0
+        done < <(awk '/^[[:space:]]*server_name[[:space:]]+/ {
+            for (i = 2; i <= NF; i++) {
+                gsub(/;$/, "", $i)
+                if ($i != "" && $i != "_") print $i
+            }
+        }' "$conf")
+    fi
+    return 1
+}
+
+# Main-menu / Manage panel entry: run the existing turnkey setup on a
+# panel that is already installed. Does not reinstall, does not create a
+# test user, and does not generate VK hashes.
+manage_remnawave_x_turnkey() {
+    if ! type panel_is_installed >/dev/null 2>&1 || ! panel_is_installed; then
+        echo -e "${COLOR_YELLOW}$(rwx_msg RWX_PROVISION_NO_PANEL)${COLOR_RESET}"
+        return 0
+    fi
+    if type load_edition_module >/dev/null 2>&1; then
+        load_edition_module || true
+    fi
+    if ! rwx_is_remnawave_x_edition; then
+        echo -e "${COLOR_YELLOW}$(rwx_msg RWX_PROVISION_SKIP)${COLOR_RESET}"
+        return 0
+    fi
+    if type load_api_module >/dev/null 2>&1; then
+        load_api_module || {
+            echo -e "${COLOR_YELLOW}$(rwx_msg RWX_PROVISION_FAIL "API module not loaded")${COLOR_RESET}"
+            return 0
+        }
+    fi
+    if ! type get_panel_token >/dev/null 2>&1 || ! get_panel_token; then
+        echo -e "${COLOR_YELLOW}$(rwx_msg RWX_PROVISION_FAIL "could not authenticate with the panel")${COLOR_RESET}"
+        return 0
+    fi
+    local token domain_url public_host
+    token=$(cat "${TOKEN_FILE:-}" 2>/dev/null || true)
+    domain_url="127.0.0.1:3000"
+    if [ -z "$token" ]; then
+        echo -e "${COLOR_YELLOW}$(rwx_msg RWX_PROVISION_FAIL "could not authenticate with the panel")${COLOR_RESET}"
+        return 0
+    fi
+    public_host="$(rwx_local_public_host || true)"
+    provision_remnawave_x_turnkey "$domain_url" "$token" "$public_host" || true
 }

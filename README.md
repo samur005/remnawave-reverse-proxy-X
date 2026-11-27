@@ -101,6 +101,7 @@ bash <(curl -Ls https://cdn.jsdelivr.net/gh/samur005/remnawave-reverse-proxy-X@m
 |---|---|
 | [Install components](https://wiki.egam.es/installation/requirements) | Five installation modes plus connecting a new node to a running panel |
 | Panel management | Service status, start and stop, updates, logs, Remnawave X CLI, panel access |
+| Set up inbounds, hosts and qWDTT | Turnkey managed inbounds, hosts and qWDTT on an already-installed Remnawave X panel, from the main menu; does not reinstall or duplicate existing entries |
 | [Backup and restore](https://wiki.egam.es/configuration/backup-restore) | PostgreSQL database and panel configuration backup, restore on the same or a new server, delivery to Telegram, Google Drive and S3, scheduled copies |
 | Script updates | Update check and installation, runs as the short `rr` command |
 
