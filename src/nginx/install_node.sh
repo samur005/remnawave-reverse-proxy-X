@@ -109,6 +109,8 @@ installation_node() {
     network_mode: host
     cap_add:
       - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
     environment:
       - NODE_PORT=2222
       - SECRET_KEY=$(echo -e "$CERTIFICATE")
