@@ -99,6 +99,8 @@ If you installed the **panel and node together** in the Remnawave X edition, the
 
 If those inbounds or hosts already exist, the script does not duplicate them and does not delete anything. It does not create a test user.
 
+If a Remnawave X panel is already installed, you can run the same turnkey setup later from the installer’s main menu (`rr`), without reinstalling: **“Set up inbounds, hosts and qWDTT”** (also available under “Manage Panel and Components”). If there is no panel on this server, the edition is Official, or there is no node, the script shows a message and returns to the menu.
+
 ### VK hashes
 
 VK hashes are created in the panel, in the qWDTT settings. The installer does not generate hashes and does not insert or ask for session cookies (`remixsid`) during install. `autoVkHash` is only enabled as a panel option.

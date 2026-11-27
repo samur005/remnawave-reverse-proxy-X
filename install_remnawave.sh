@@ -960,15 +960,16 @@ show_menu() {
         echo -e "${COLOR_YELLOW}9. ${LANG[MENU_13]}${COLOR_RESET}" # NetBird overlay
     fi
     echo -e ""
-    echo -e "${COLOR_YELLOW}10. ${LANG[MENU_8]}${COLOR_RESET}" # Manage IPv6
-    echo -e "${COLOR_YELLOW}11. ${LANG[MENU_9]}${COLOR_RESET}" # Manage certificates domain
+    echo -e "${COLOR_YELLOW}10. ${LANG[MENU_RWX_TURNKEY]}${COLOR_RESET}" # Set up inbounds, hosts and qWDTT
+    echo -e "${COLOR_YELLOW}11. ${LANG[MENU_8]}${COLOR_RESET}" # Manage IPv6
+    echo -e "${COLOR_YELLOW}12. ${LANG[MENU_9]}${COLOR_RESET}" # Manage certificates domain
     echo -e ""
     if [[ "$UPDATE_AVAILABLE" == true ]]; then
-        echo -e "${COLOR_YELLOW}12. ${COLOR_RED}${LANG[MENU_10_UPDATE]}${COLOR_RESET}"
+        echo -e "${COLOR_YELLOW}13. ${COLOR_RED}${LANG[MENU_10_UPDATE]}${COLOR_RESET}"
     else
-        echo -e "${COLOR_YELLOW}12. ${LANG[MENU_10]}${COLOR_RESET}" # Check for updates
+        echo -e "${COLOR_YELLOW}13. ${LANG[MENU_10]}${COLOR_RESET}" # Check for updates
     fi
-    echo -e "${COLOR_YELLOW}13. ${LANG[MENU_11]}${COLOR_RESET}" # Remove script
+    echo -e "${COLOR_YELLOW}14. ${LANG[MENU_11]}${COLOR_RESET}" # Remove script
     echo -e ""
     echo -e "${COLOR_YELLOW}0. ${LANG[EXIT]}${COLOR_RESET}"
     echo -e "${COLOR_YELLOW}- ${LANG[FAST_START]//remnawave_reverse/${COLOR_GREEN}remnawave_reverse${COLOR_RESET}} ${COLOR_GREEN}${LANG[FAST_START_ALIAS]}${COLOR_RESET}"
@@ -2187,6 +2188,21 @@ case $OPTION in
         remnawave_reverse
         ;;
     10)
+        if type load_edition_module >/dev/null 2>&1; then
+            load_edition_module || true
+        fi
+        if type load_api_module >/dev/null 2>&1; then
+            load_api_module || true
+        fi
+        if load_provision_remnawave_x_module; then
+            manage_remnawave_x_turnkey
+        else
+            printf "${COLOR_RED}${LANG[MODULE_LOAD_FAILED]}${COLOR_RESET}\n" provision_remnawave_x
+        fi
+        sleep 2
+        remnawave_reverse
+        ;;
+    11)
         if load_ipv6_module; then
             manage_ipv6
         else
@@ -2195,7 +2211,7 @@ case $OPTION in
         sleep 2
         remnawave_reverse
         ;;
-    11)
+    12)
         if load_certificates_module; then
             manage_certificates
         else
@@ -2204,12 +2220,12 @@ case $OPTION in
         sleep 2
         remnawave_reverse
         ;;
-    12)
+    13)
         update_remnawave_reverse
         sleep 2
         remnawave_reverse
         ;;
-    13)
+    14)
         remove_script
         ;;
     0)

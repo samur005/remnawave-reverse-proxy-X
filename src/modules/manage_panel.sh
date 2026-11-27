@@ -80,6 +80,7 @@ show_manage_panel_menu() {
     local opt_access="__none__"
     local opt_upgrade="__none__"
     local opt_minclientver="__none__"
+    local opt_turnkey="__none__"
     local opt_edition="__none__"
     local opt_rollback="__none__"
 
@@ -99,6 +100,10 @@ show_manage_panel_menu() {
         last=$((last + 1))
         opt_minclientver=$last
         echo -e "${COLOR_YELLOW}${last}. ${LANG[MINCLIENTVER_MENU]}${COLOR_RESET}"
+
+        last=$((last + 1))
+        opt_turnkey=$last
+        echo -e "${COLOR_YELLOW}${last}. ${LANG[MENU_RWX_TURNKEY]}${COLOR_RESET}"
     fi
 
     last=$((last + 1))
@@ -153,6 +158,18 @@ show_manage_panel_menu() {
             ;;
         "$opt_minclientver")
             set_reality_min_client_ver
+            sleep 2
+            show_manage_panel_menu
+            ;;
+        "$opt_turnkey")
+            if type load_provision_remnawave_x_module >/dev/null 2>&1; then
+                load_provision_remnawave_x_module || true
+            fi
+            if type manage_remnawave_x_turnkey >/dev/null 2>&1; then
+                manage_remnawave_x_turnkey
+            else
+                printf "${COLOR_RED}${LANG[MODULE_LOAD_FAILED]}${COLOR_RESET}\n" provision_remnawave_x
+            fi
             sleep 2
             show_manage_panel_menu
             ;;
