@@ -335,6 +335,8 @@ installation() {
     network_mode: host
     cap_add:
       - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
     environment:
       - NODE_PORT=2222
       - SECRET_KEY="PUBLIC KEY FROM REMNAWAVE-PANEL"
